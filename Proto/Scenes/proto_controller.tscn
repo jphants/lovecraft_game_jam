@@ -37,3 +37,5 @@ transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.234
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.17585571, 0)
+spot_range = 6.4118547
+spot_angle = 31.097908

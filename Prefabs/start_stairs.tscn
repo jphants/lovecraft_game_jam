@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://sjym7jfgmknr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryacb"]
+albedo_color = Color(0.18675604, 0.57727015, 0.29853874, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fdw6k"]
+material = SubResource("StandardMaterial3D_ryacb")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aa3k6"]
+
+[node name="StartStairs" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_fdw6k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_aa3k6")
