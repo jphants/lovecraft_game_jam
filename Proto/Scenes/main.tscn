@@ -25,7 +25,6 @@ environment = SubResource("Environment_bo1nx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-visible = false
 light_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
 shadow_enabled = true
 
@@ -45,22 +44,16 @@ size = Vector3(1, 6, 16)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.5, -7.5)
 size = Vector3(1, 6, 16)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3"]
-transform = Transform3D(0.58992946, 0, 0.8074548, 0, 1, 0, -0.8074548, 0, 0.58992946, 2.2553844, 0.5242677, 10.483475)
-size = Vector3(1, 6, 16)
-
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.5, 2.5, -15.5)
 size = Vector3(1, 6, 17)
 
 [node name="ProtoController" parent="." instance=ExtResource("1_v4o7x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.228653, 1, 2)
-can_sprint = true
-can_freefly = true
+step_distance = 5.0
+move_duration = 0.3
+rotate_duration = 0.3
 input_left = "m_left"
 input_right = "m_right"
 input_forward = "m_up"
 input_back = "m_down"
-input_jump = "m_jump"
-input_sprint = "m_sprint"
-input_freefly = "m_freefly"
