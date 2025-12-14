@@ -33,9 +33,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="Flashlight" parent="Head/Camera3D" instance=ExtResource("2_ivtui")]
-transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.5131798, -0.35414028, -0.5674708)
+transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.3387015, -0.35414028, -0.41542682)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/Flashlight"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.17585571, 0)
+transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0, 0.14734915, 0)
 spot_range = 6.4118547
 spot_angle = 31.097908
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera3D/Flashlight"]
+transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0.0019771457, 0.10928576, 0.14311671)
+light_energy = 0.1
+omni_range = 0.62857103

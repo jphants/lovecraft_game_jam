@@ -3592,7 +3592,10 @@ transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 24.5, -0.5, 24.5)
 
 [node name="ProtoController" parent="." instance=ExtResource("3_2maj4")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 24, 0.5, 40)
-step_distance = 2.0
+input_left = "m_left"
+input_right = "m_right"
+input_forward = "m_up"
+input_back = "m_down"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rsokp")
@@ -3600,5 +3603,5 @@ environment = SubResource("Environment_rsokp")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 visible = false
-light_color = Color(0.07683582, 0.07683582, 0.07683582, 1)
+light_color = Color(0.8217887, 0.82178867, 0.82178867, 1)
 shadow_enabled = true
