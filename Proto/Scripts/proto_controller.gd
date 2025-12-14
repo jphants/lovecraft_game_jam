@@ -28,6 +28,8 @@ extends CharacterBody3D
 ## How fast do we freefly?
 @export var freefly_speed : float = 25.0
 
+@export var light_switch : bool = false
+
 @export_group("Input Actions")
 ## Name of Input Action to move Left.
 @export var input_left : String = "ui_left"
@@ -44,6 +46,8 @@ extends CharacterBody3D
 ## Name of Input Action to toggle freefly mode.
 @export var input_freefly : String = "freefly"
 
+@export var input_flashlight : String = "flashlight"
+
 var mouse_captured : bool = false
 var look_rotation : Vector2
 var move_speed : float = 0.0
@@ -52,6 +56,13 @@ var freeflying : bool = false
 ## IMPORTANT REFERENCES
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
+@onready var flashlight: SpotLight3D = $Head/Camera3D/Flashlight/SpotLight3D
+
+var flashlight_on := true
+
+func switch_flashlight() -> void:
+	flashlight_on = !flashlight_on
+	flashlight.visible = flashlight_on
 
 func _ready() -> void:
 	check_input_mappings()
@@ -84,6 +95,9 @@ func _physics_process(delta: float) -> void:
 		motion *= freefly_speed * delta
 		move_and_collide(motion)
 		return
+	
+	if Input.is_action_just_pressed("flashlight"):
+		switch_flashlight()
 	
 	# Apply gravity to velocity
 	if has_gravity:
