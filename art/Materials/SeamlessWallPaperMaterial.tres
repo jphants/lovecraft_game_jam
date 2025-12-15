@@ -1,0 +1,9 @@
+[gd_resource type="ORMMaterial3D" load_steps=2 format=3 uid="uid://chblsyrx4db8v"]
+
+[ext_resource type="Texture2D" uid="uid://buu2200omqq08" path="res://art/SeamlessTextures/Wallpaper.png" id="1_grr6k"]
+
+[resource]
+albedo_texture = ExtResource("1_grr6k")
+uv1_scale = Vector3(-2.865, -2.865, -2.865)
+uv1_triplanar = true
+uv1_world_triplanar = true

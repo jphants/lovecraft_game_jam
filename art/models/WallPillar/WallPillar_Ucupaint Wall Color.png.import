@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcxk67i7qovp7"
-path.s3tc="res://.godot/imported/PrisonBars_Ucupaint Cube Color.png-d22e33cfc397c596e2d1cafd54a02b01.s3tc.ctex"
+uid="uid://b41kbkwuw43qb"
+path.s3tc="res://.godot/imported/WallPillar_Ucupaint Wall Color.png-0090cab732a7ed3757ef11bc3d3d1a0e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "7bc4be240ca2aaa4c0cbcb0f7b819d68"
+"md5": "aaf853db86cfe3bf91627c52459e8702"
 }
 
 [deps]
 
-source_file="res://art/models/PrisonBars/PrisonBars_Ucupaint Cube Color.png"
-dest_files=["res://.godot/imported/PrisonBars_Ucupaint Cube Color.png-d22e33cfc397c596e2d1cafd54a02b01.s3tc.ctex"]
+source_file="res://art/models/WallPillar/WallPillar_Ucupaint Wall Color.png"
+dest_files=["res://.godot/imported/WallPillar_Ucupaint Wall Color.png-0090cab732a7ed3757ef11bc3d3d1a0e.s3tc.ctex"]
 
 [params]
 
