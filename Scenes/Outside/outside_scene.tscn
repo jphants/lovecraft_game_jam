@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhhgoa5qvwsv"]
+[gd_scene load_steps=45 format=3 uid="uid://dhhgoa5qvwsv"]
 
 [ext_resource type="Script" uid="uid://clq4rrdt0hj7g" path="res://Scenes/Outside/outside_scene.gd" id="1_noh1l"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://Proto/Scenes/proto_controller.tscn" id="2_rc72b"]
 [ext_resource type="Script" uid="uid://6cwwmoou8wgg" path="res://Scenes/Outside/teleporter.gd" id="3_hgy54"]
 [ext_resource type="PackedScene" uid="uid://ddofrga67pgaf" path="res://Dungeon Generation/Dungeon_generator.tscn" id="4_6set6"]
+[ext_resource type="Script" uid="uid://dndlw1yho4l0d" path="res://Scenes/Outside/interactive_object.gd" id="5_evuug"]
+[ext_resource type="Texture2D" uid="uid://bq31a3d21ijny" path="res://art/Eyes/eyes1.png" id="6_ganml"]
+[ext_resource type="Script" uid="uid://mrdr4s75tucq" path="res://Scenes/Outside/eye_player.gd" id="6_hk1ni"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rc72b"]
 albedo_color = Color(0.12248912, 0.352611, 0.120152496, 1)
@@ -13,13 +16,223 @@ material = SubResource("StandardMaterial3D_rc72b")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6set6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hgy54"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6set6"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6set6"]
-material = SubResource("StandardMaterial3D_hgy54")
+material = SubResource("StandardMaterial3D_6set6")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rc72b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evuug"]
+albedo_color = Color(0.11573803, 0.624776, 0.72859025, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ganml"]
+material = SubResource("StandardMaterial3D_evuug")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_go262"]
+atlas = ExtResource("6_ganml")
+region = Rect2(0, 0, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri2nu"]
+atlas = ExtResource("6_ganml")
+region = Rect2(432, 0, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tj7w"]
+atlas = ExtResource("6_ganml")
+region = Rect2(864, 0, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5mwb"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1296, 0, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4dui"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1728, 0, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5m4ve"]
+atlas = ExtResource("6_ganml")
+region = Rect2(2160, 0, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47u6d"]
+atlas = ExtResource("6_ganml")
+region = Rect2(0, 240, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqsf5"]
+atlas = ExtResource("6_ganml")
+region = Rect2(432, 240, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iggqw"]
+atlas = ExtResource("6_ganml")
+region = Rect2(864, 240, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb48s"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1296, 240, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkr6w"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1728, 240, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4723k"]
+atlas = ExtResource("6_ganml")
+region = Rect2(2160, 240, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_clbmt"]
+atlas = ExtResource("6_ganml")
+region = Rect2(0, 480, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_326aj"]
+atlas = ExtResource("6_ganml")
+region = Rect2(432, 480, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_if861"]
+atlas = ExtResource("6_ganml")
+region = Rect2(864, 480, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2g0ae"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1296, 480, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnrju"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1728, 480, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml2jt"]
+atlas = ExtResource("6_ganml")
+region = Rect2(2160, 480, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpwud"]
+atlas = ExtResource("6_ganml")
+region = Rect2(0, 720, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o478m"]
+atlas = ExtResource("6_ganml")
+region = Rect2(432, 720, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5nl0"]
+atlas = ExtResource("6_ganml")
+region = Rect2(864, 720, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10m20"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1296, 720, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lx1cb"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1728, 720, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6005"]
+atlas = ExtResource("6_ganml")
+region = Rect2(2160, 720, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3e5m"]
+atlas = ExtResource("6_ganml")
+region = Rect2(0, 960, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n1msj"]
+atlas = ExtResource("6_ganml")
+region = Rect2(432, 960, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph44b"]
+atlas = ExtResource("6_ganml")
+region = Rect2(864, 960, 432, 240)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l82al"]
+atlas = ExtResource("6_ganml")
+region = Rect2(1296, 960, 432, 240)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ldxv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_go262")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri2nu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tj7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5mwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4dui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5m4ve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47u6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqsf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iggqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tb48s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkr6w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4723k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_clbmt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_326aj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_if861")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2g0ae")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnrju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ml2jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpwud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o478m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5nl0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10m20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lx1cb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6005")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3e5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n1msj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph44b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l82al")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
 
 [node name="OutsideScene" type="Node3D"]
 script = ExtResource("1_noh1l")
@@ -37,12 +250,16 @@ shape = SubResource("BoxShape3D_6set6")
 [node name="ProtoController" parent="." instance=ExtResource("2_rc72b")]
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7392251, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0138152, -1.3018038)
 text = "TO DO:
 PUT THE WAREHOUSE ENTRY AND LOAD THE FIRST AREA"
 
 [node name="Teleporter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43275, 0, 0)
+
+[node name="Label3D" type="Label3D" parent="Teleporter"]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0.87570643, 0)
+text = "TELEPORTER"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Teleporter"]
 mesh = SubResource("BoxMesh_6set6")
@@ -54,3 +271,29 @@ target_scene = ExtResource("4_6set6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter/Area3D"]
 shape = SubResource("BoxShape3D_rc72b")
+
+[node name="InteractiveObjectSample" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43275, 0.36182904, 2.5976644)
+
+[node name="Label3D" type="Label3D" parent="InteractiveObjectSample"]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0.87570643, 0)
+text = "Interactive object example"
+
+[node name="Area3D" type="Area3D" parent="InteractiveObjectSample"]
+script = ExtResource("5_evuug")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObjectSample/Area3D"]
+shape = SubResource("BoxShape3D_rc72b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractiveObjectSample"]
+layers = 3
+mesh = SubResource("BoxMesh_ganml")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3129206, 1.860785)
+script = ExtResource("6_hk1ni")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Node3D"]
+sprite_frames = SubResource("SpriteFrames_3ldxv")
+animation = &"idle"
+frame_progress = 0.6840661

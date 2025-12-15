@@ -49,11 +49,12 @@ var flashlight_base_rotation: Vector3
 
 var wobble_time := 0.0
 var mouse_rotation := Vector2.ZERO
-
+@onready var SeeCast = $Head/Camera3D/Flashlight/RayCast3D
 # =========================
 # READY
 # =========================
 func _ready() -> void:
+	SeeCast.enabled = true
 	flashlight_base_position = flashlight_root.position
 	flashlight_base_rotation = flashlight_root.rotation
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -89,10 +90,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(input_flashlight):
 		switch_flashlight()
 
+
 # =========================
 # PHYSICS
 # =========================
 func _physics_process(delta: float) -> void:
+
+	if SeeCast.is_colliding():
+		var target = SeeCast.get_collider()
+		if target.has_method("interact"):
+			$CanvasLayer/BoxContainer/Label.show()
+			print("You can interact with this...")
+		else:
+			$CanvasLayer/BoxContainer/Label.hide()
+	else:
+		$CanvasLayer/BoxContainer/Label.hide()
+
 	if has_gravity and not is_on_floor():
 		velocity += get_gravity() * delta
 		move_and_slide()
@@ -108,7 +121,6 @@ func _physics_process(delta: float) -> void:
 
 	update_flashlight_wobble(delta)
 	update_flashlight_aim()
-
 
 # =========================
 # MOVIMIENTO DUNGEON
