@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rlmg5lri3y8p"
-path.s3tc="res://.godot/imported/GroundTile_Ucupaint Material Color.png-7bd8d948f1901ece3e2c3b371e7e00b3.s3tc.ctex"
+uid="uid://dkjd03cemwqrh"
+path.s3tc="res://.godot/imported/GroundTile_Ucupaint Cylinder Color.png-9aa003c5217e2c010ee524bc4b57b405.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a28788824614f355f541a53f932067f9"
+"md5": "b22f5f6c405e71471210836d4015720d"
 }
 
 [deps]
 
-source_file="res://art/models/GroundTile/GroundTile_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/GroundTile_Ucupaint Material Color.png-7bd8d948f1901ece3e2c3b371e7e00b3.s3tc.ctex"]
+source_file="res://art/models/GroundTile/GroundTile_Ucupaint Cylinder Color.png"
+dest_files=["res://.godot/imported/GroundTile_Ucupaint Cylinder Color.png-9aa003c5217e2c010ee524bc4b57b405.s3tc.ctex"]
 
 [params]
 

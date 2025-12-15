@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rlmg5lri3y8p"
-path.s3tc="res://.godot/imported/GroundTile_Ucupaint Material Color.png-7bd8d948f1901ece3e2c3b371e7e00b3.s3tc.ctex"
+uid="uid://cp8wdagf2c21e"
+path.s3tc="res://.godot/imported/GroundTile_Ucupaint Wall Color.png-72de71e70b9ed0649597d9e03f065027.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a28788824614f355f541a53f932067f9"
+"md5": "e923bc32c9978137098a58da4ceed7db"
 }
 
 [deps]
 
-source_file="res://art/models/GroundTile/GroundTile_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/GroundTile_Ucupaint Material Color.png-7bd8d948f1901ece3e2c3b371e7e00b3.s3tc.ctex"]
+source_file="res://art/models/GroundTile/GroundTile_Ucupaint Wall Color.png"
+dest_files=["res://.godot/imported/GroundTile_Ucupaint Wall Color.png-72de71e70b9ed0649597d9e03f065027.s3tc.ctex"]
 
 [params]
 

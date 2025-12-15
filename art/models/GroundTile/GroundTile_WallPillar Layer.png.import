@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rlmg5lri3y8p"
-path.s3tc="res://.godot/imported/GroundTile_Ucupaint Material Color.png-7bd8d948f1901ece3e2c3b371e7e00b3.s3tc.ctex"
+uid="uid://crfk30ikr38ns"
+path.s3tc="res://.godot/imported/GroundTile_WallPillar Layer.png-fd4200360bf897a80cefe4ecf7b1edc9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a28788824614f355f541a53f932067f9"
+"md5": "b5cfa9d6c8febd618f91ac2843d50a1c"
 }
 
 [deps]
 
-source_file="res://art/models/GroundTile/GroundTile_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/GroundTile_Ucupaint Material Color.png-7bd8d948f1901ece3e2c3b371e7e00b3.s3tc.ctex"]
+source_file="res://art/models/GroundTile/GroundTile_WallPillar Layer.png"
+dest_files=["res://.godot/imported/GroundTile_WallPillar Layer.png-fd4200360bf897a80cefe4ecf7b1edc9.s3tc.ctex"]
 
 [params]
 
