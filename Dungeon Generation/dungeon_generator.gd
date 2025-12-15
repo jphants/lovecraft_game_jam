@@ -1,30 +1,55 @@
 @tool
 extends Node3D
 
+# =========================
+# PLAYER
+# =========================
 @export_group("Player")
 @export var player: CharacterBody3D
 
 @export var generate_map := false : set = _set_generate
 @export var clear_map := false : set = _set_clear
 
+# =========================
+# GRID
+# =========================
 @export_group("Grid")
 @export var width := 30
 @export var height := 30
 @export var cell_size := 2.0
 
+# =========================
+# ROOMS
+# =========================
 @export_group("Rooms")
 @export var room_count := 6
 @export var min_room_size := 3
 @export var max_room_size := 7
 
-@export_group("Prefabs")
-@export var floor_scene: PackedScene
-@export var filler_scene: PackedScene      # café
-@export var room_item_scene: PackedScene   # celeste
-@export var start_scene: PackedScene       # verde
-@export var end_scene: PackedScene         # amarillo
-@export var border_scene: PackedScene      # rojo
+# =========================
+# PREFABS (PAIRED)
+# =========================
+@export_group("Floors")
+@export var floors: Array[WeightedPrefab] = []
 
+@export_group("Fillers")
+@export var fillers: Array[WeightedPrefab] = []
+
+@export_group("Room Items")
+@export var room_items: Array[WeightedPrefab] = []
+
+@export_group("Start")
+@export var starts: Array[WeightedPrefab] = []
+
+@export_group("End")
+@export var ends: Array[WeightedPrefab] = []
+
+@export_group("Borders")
+@export var borders: Array[WeightedPrefab] = []
+
+# =========================
+# INTERNAL DATA
+# =========================
 var grid := []
 var room_centers := []
 
@@ -122,46 +147,45 @@ func build_all() -> void:
 			var pos := Vector3(x * cell_size, 0, z * cell_size)
 
 			if grid[z][x] == 1 or grid[z][x] == 2:
-				spawn(floor_scene, pos)
+				spawn(pick_weighted(floors), pos)
 
-			if grid[z][x] == 2 and room_item_scene:
-				spawn(room_item_scene, pos)
+			if grid[z][x] == 2:
+				spawn(pick_weighted(room_items), pos)
 
 			if grid[z][x] == 0 and has_floor_neighbor(x, z):
-				spawn(filler_scene, pos)
+				spawn(pick_weighted(fillers), pos)
 
 	build_start_end()
 
 func has_floor_neighbor(x:int, z:int) -> bool:
 	for dz in [-1, 0, 1]:
 		for dx in [-1, 0, 1]:
-			var nx:int = x + dx
-			var nz:int = z + dz
-
+			var nx: int = x + dx
+			var nz: int = z + dz
 			if nx >= 0 and nz >= 0 and nx < width and nz < height:
 				if grid[nz][nx] > 0:
 					return true
 	return false
 
 func build_start_end() -> void:
-	if room_centers.size() == 0:
+	if room_centers.is_empty():
 		return
 
 	var start_pos := grid_to_world(room_centers[0])
 	var end_pos := grid_to_world(room_centers[-1])
 
-	var start_node := spawn(start_scene, start_pos)
-	var end_node := spawn(end_scene, end_pos)
+	spawn(pick_weighted(starts), start_pos)
+	spawn(pick_weighted(ends), end_pos)
 
 	if player:
 		player.global_position = start_pos + Vector3(0, cell_size * 0.5, 0)
 
-
 func build_border() -> void:
-	if border_scene == null:
+	var scene := pick_weighted(borders)
+	if scene == null:
 		return
 
-	var border := border_scene.instantiate()
+	var border := scene.instantiate()
 	border.scale = Vector3(width * cell_size, cell_size, height * cell_size)
 	border.position = Vector3(
 		(width * cell_size) / 2.0 - cell_size / 2.0,
@@ -174,6 +198,30 @@ func build_border() -> void:
 # =========================
 # HELPERS
 # =========================
+func pick_weighted(prefabs: Array[WeightedPrefab]) -> PackedScene:
+	if prefabs.is_empty():
+		return null
+
+	var total := 0.0
+	for p in prefabs:
+		if p and p.scene:
+			total += max(p.weight, 0.0)
+
+	if total <= 0.0:
+		return prefabs.pick_random().scene
+
+	var r := randf() * total
+	var acc := 0.0
+
+	for p in prefabs:
+		if not p or not p.scene:
+			continue
+		acc += max(p.weight, 0.0)
+		if r <= acc:
+			return p.scene
+
+	return prefabs[-1].scene
+
 func grid_to_world(p:Vector2i) -> Vector3:
 	return Vector3(p.x * cell_size, 0, p.y * cell_size)
 
@@ -181,12 +229,11 @@ func spawn(scene: PackedScene, pos: Vector3) -> Node3D:
 	if scene == null:
 		return null
 
-	var n: Node3D = scene.instantiate()
+	var n := scene.instantiate()
 	n.position = pos
 	add_child(n)
 	n.owner = get_tree().edited_scene_root
 	return n
-
 
 # =========================
 # CLEAR
