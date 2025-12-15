@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b160hedtxuwi"]
+
+[ext_resource type="PackedScene" uid="uid://be8hmjcqfg2qp" path="res://art/models/WallEye/WallEye.glb" id="1_koo4b"]
+[ext_resource type="Script" uid="uid://b4mv66hex8yyi" path="res://art/ModelScripts/WallEye.gd" id="2_svy3c"]
+
+[node name="WallEye" instance=ExtResource("1_koo4b")]
+script = ExtResource("2_svy3c")
