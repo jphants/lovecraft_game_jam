@@ -58,6 +58,10 @@ func _ready() -> void:
 	flashlight_base_rotation = flashlight_root.rotation
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+@export var forward_repeat_delay := 0.18
+var forward_timer := 0.0
+
+
 # =========================
 # INPUT
 # =========================
@@ -79,10 +83,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_step(90)
 	elif event.is_action_pressed(input_right):
 		rotate_step(-90)
-	elif event.is_action_pressed(input_forward):
-		move_forward()
 	elif event.is_action_pressed(input_back):
-		rotate_step(180)
+		move_backward()
 
 	if event.is_action_pressed(input_flashlight):
 		switch_flashlight()
@@ -95,14 +97,45 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 		move_and_slide()
 
+	# Forward continuo por tiles
+	if not is_moving and Input.is_action_pressed(input_forward):
+		forward_timer -= delta
+		if forward_timer <= 0.0:
+			move_forward()
+			forward_timer = forward_repeat_delay
+	else:
+		forward_timer = 0.0
+
 	update_flashlight_wobble(delta)
 	update_flashlight_aim()
+
 
 # =========================
 # MOVIMIENTO DUNGEON
 # =========================
 func move_forward() -> void:
 	var direction := -transform.basis.z
+	var motion := direction * step_distance
+
+	var collision := move_and_collide(motion, true)
+	if collision:
+		return
+
+	is_moving = true
+	target_position = global_position + motion
+
+	var tween := create_tween()
+	tween.tween_property(
+		self,
+		"global_position",
+		target_position,
+		move_duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween.finished.connect(func(): is_moving = false)
+	
+func move_backward() -> void:
+	var direction := transform.basis.z
 	var motion := direction * step_distance
 
 	var collision := move_and_collide(motion, true)

@@ -15,7 +15,14 @@ radius = 0.4
 height = 1.8
 
 [node name="ProtoController" type="CharacterBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_kop0b")
+move_duration = 0.4
+rotate_duration = 0.5
+input_left = "m_left"
+input_right = "m_right"
+input_forward = "m_up"
+input_back = "m_down"
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -33,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="Flashlight" parent="Head/Camera3D" instance=ExtResource("2_ivtui")]
-transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.3387015, -0.35414028, -0.41542682)
+transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.25495422, -0.35414028, -0.16254231)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0, 0.14734915, 0)
@@ -42,5 +49,6 @@ spot_angle = 31.097908
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0.0019771457, 0.10928576, 0.14311671)
+visible = false
 light_energy = 0.1
 omni_range = 0.62857103
