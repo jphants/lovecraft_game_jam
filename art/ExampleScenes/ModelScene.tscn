@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://l7sbclutnmw2"]
+[gd_scene load_steps=30 format=3 uid="uid://l7sbclutnmw2"]
 
 [ext_resource type="PackedScene" uid="uid://d33greivnj2ak" path="res://art/models/Wall/Wall.glb" id="1_hn4ka"]
 [ext_resource type="PackedScene" uid="uid://luir7n4lc4mw" path="res://art/models/GroundTile/GroundTile.glb" id="2_y5pbv"]
@@ -25,6 +25,10 @@
 [ext_resource type="PackedScene" uid="uid://xr0tbto1wk6" path="res://art/models/Bowl/Bowl.glb" id="23_u6ypf"]
 [ext_resource type="PackedScene" uid="uid://dcjfl3o8l57he" path="res://art/models/Sink/Sink.glb" id="24_1scpy"]
 [ext_resource type="PackedScene" uid="uid://dumimwib86qtt" path="res://art/models/Toilet/Toilet.glb" id="25_fa5vc"]
+[ext_resource type="PackedScene" uid="uid://bd64w6hfcfqod" path="res://art/models/VineBody/VinesBody.glb" id="26_hq6t4"]
+[ext_resource type="PackedScene" uid="uid://ce6wkaifxk8d6" path="res://art/models/Vines1/Vines1.glb" id="27_u6ypf"]
+[ext_resource type="PackedScene" uid="uid://coud52hpxhy5l" path="res://art/models/Vines2/Vines2.glb" id="28_1scpy"]
+[ext_resource type="PackedScene" uid="uid://dr2yiqfj3x2xs" path="res://art/ModelPrefabs/WallEyePrefab.tscn" id="29_u6ypf"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -198,3 +202,24 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.65
 
 [node name="Toilet" parent="." instance=ExtResource("25_fa5vc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8789167, 0.15009534, -5.4864144)
+
+[node name="VinesBody" parent="." instance=ExtResource("26_hq6t4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7861218, 0.30370694, 1.1377747)
+
+[node name="Vines1" parent="." instance=ExtResource("27_u6ypf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7116473, 0.60494554, 0.64652133)
+
+[node name="Vines2" parent="." instance=ExtResource("28_1scpy")]
+transform = Transform3D(0.9892366, 0.14632475, 0, -0.14632475, 0.9892366, 0, 0, 0, 1, -0.7117901, 3.6585054, 0.27278042)
+
+[node name="WallEyePrefab" parent="." instance=ExtResource("29_u6ypf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47325182, 0.26433718, -0.939172)
+
+[node name="WallEyePrefab2" parent="." instance=ExtResource("29_u6ypf")]
+transform = Transform3D(0.3514465, 0, 0.13080654, 0, 0.375, 0, -0.13080654, 0, 0.3514465, 1.1883328, 0.26433718, 0.34195864)
+
+[node name="WallEyePrefab3" parent="." instance=ExtResource("29_u6ypf")]
+transform = Transform3D(0.1578776, 0, -0.04795485, 0, 0.165, 0, 0.04795485, 0, 0.1578776, 0.27422, 0.26433718, 0.21984506)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.04975526, -0.3752538, 0.92558575, 0.020142848, 0.9269221, 0.3747128, -0.9985583, 0, 0.05367793, 4.130181, 2.2715006, -0.1190294)
