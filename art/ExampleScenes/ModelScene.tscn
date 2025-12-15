@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://l7sbclutnmw2"]
+[gd_scene load_steps=16 format=3 uid="uid://l7sbclutnmw2"]
 
 [ext_resource type="PackedScene" uid="uid://d33greivnj2ak" path="res://art/models/Wall/Wall.glb" id="1_hn4ka"]
 [ext_resource type="PackedScene" uid="uid://luir7n4lc4mw" path="res://art/models/GroundTile/GroundTile.glb" id="2_y5pbv"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dl7lrhk4rfif0" path="res://art/models/Fences/Fences.glb" id="11_y4m6i"]
 [ext_resource type="PackedScene" uid="uid://dj4ekeixv2ynb" path="res://art/models/BoxMedium/BoxMedium.glb" id="12_c8act"]
 [ext_resource type="PackedScene" uid="uid://dnc6tmesx3mi7" path="res://art/models/BoxSmall/BoxSmall.glb" id="13_v4gx6"]
+[ext_resource type="PackedScene" uid="uid://brrxinf7dfycd" path="res://art/models/WallWithDoorHole/WallWithDoorHole.glb" id="14_q3q5q"]
+[ext_resource type="PackedScene" uid="uid://cwu1y28vklq58" path="res://art/models/Door/Door.glb" id="15_7lgaq"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -102,3 +104,9 @@ transform = Transform3D(0.99951786, 0.03026855, -0.006916014, -0.029930647, 0.99
 
 [node name="BoxSmall2" parent="." instance=ExtResource("13_v4gx6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6320462, 0.16125977, 15.417049)
+
+[node name="WallWithDoorHole" parent="." instance=ExtResource("14_q3q5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Door2" parent="." instance=ExtResource("15_7lgaq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
