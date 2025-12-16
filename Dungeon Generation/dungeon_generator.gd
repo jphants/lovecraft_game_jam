@@ -53,13 +53,18 @@ extends Node3D
 var grid := []
 var room_centers := []
 
+func _ready():
+	generate_map = true
+
+
 # =========================
 # TOOL BUTTONS
 # =========================
 func _set_generate(value: bool) -> void:
-	if Engine.is_editor_hint() and value:
+	if value:
 		generate()
 		generate_map = false
+
 
 func _set_clear(value: bool) -> void:
 	if Engine.is_editor_hint() and value:
