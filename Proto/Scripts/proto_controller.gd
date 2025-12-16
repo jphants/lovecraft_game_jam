@@ -26,9 +26,6 @@ extends CharacterBody3D
 @export var wobble_speed := 6.0
 
 @export_group("Footsteps")
-@export var extra_step_chance := 0.01
-@export var extra_step_delay_min := 1.0
-@export var extra_step_delay_max := 2.0
 
 @export var forward_repeat_delay := 0.18
 
@@ -40,13 +37,51 @@ extends CharacterBody3D
 @onready var flashlight_root: Node3D = $Head/Camera3D/Flashlight
 @onready var SeeCast: RayCast3D = $Head/Camera3D/Flashlight/RayCast3D
 @onready var step_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
-@onready var step_player_extra: AudioStreamPlayer3D = $AudioStreamPlayer3D2
 
 @onready var battery_label: Label = $CanvasLayer/Battery
 @onready var sanity_label: Label = $CanvasLayer/Sanity
 
 @export var battery = Global.battery
 @export var sanity = Global.sanity
+
+@onready var battery_bar: HBoxContainer = $CanvasLayer/BatteryBar
+@onready var health_bar: HBoxContainer = $CanvasLayer/HealthBar
+
+const BATTERY_BAR = preload("uid://ddr11jpuud2e2")
+const HEALTH_BAR = preload("uid://bxyalmprwy2cc")
+
+@onready var camera_3d: Camera3D = $Head/Camera3D
+
+# Camera shake por sanity
+var camera_base_pos: Vector3
+var shake_time := 0.0
+
+@export_group("Camera Shake")
+@export var max_shake_strength := 0.02
+@export var shake_speed := 9.0
+
+func update_camera_shake(delta: float) -> void:
+	# Normaliza sanity (1 = sano, 0 = loco)
+	var sanity_ratio: float = clamp(float(sanity) / 100.0, 0.0, 1.0)
+
+	# Intensidad inversa
+	var shake_strength: float = lerp(max_shake_strength, 0.0, sanity_ratio)
+
+	# Vuelve a la posición base si no hay shake
+	if shake_strength < 0.001:
+		camera_3d.position = camera_3d.position.lerp(camera_base_pos, delta * 8.0)
+		return
+
+	shake_time += delta * shake_speed
+
+	var offset: Vector3 = Vector3(
+		sin(shake_time * 1.3),
+		sin(shake_time * 2.1),
+		sin(shake_time * 0.9)
+	) * shake_strength
+
+	camera_3d.position = camera_base_pos + offset
+
 # =====================================================
 # ESTADO
 # =====================================================
@@ -70,12 +105,35 @@ func update_battery():
 func update_sanity():
 	sanity_label.text = "Sanity: " + str(sanity)
 
+func setup_battery_bars() -> void:
+	for i in range(MAX_BARS):
+		var bar := TextureRect.new()
+		bar.texture = BATTERY_BAR
+		bar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bar.stretch_mode = TextureRect.STRETCH_KEEP
+		battery_bar.add_child(bar)
+		battery_bars.append(bar)
+
+func setup_health_bars() -> void:
+	for i in range(MAX_BARS):
+		var bar := TextureRect.new()
+		bar.texture = HEALTH_BAR
+		bar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		bar.stretch_mode = TextureRect.STRETCH_KEEP
+		health_bar.add_child(bar)
+		health_bars.append(bar)
+
 # =====================================================
 # READY
 # =====================================================
+
 func _ready() -> void:
 	update_battery()
 	update_sanity()
+	
+	setup_battery_bars()
+	setup_health_bars()
+	update_battery_bars()
 	
 	randomize()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
@@ -144,6 +202,7 @@ func _physics_process(delta: float) -> void:
 
 	update_flashlight_wobble(delta)
 	update_flashlight_aim()
+	update_camera_shake(delta)
 
 	# 🔒 SNAP DEFENSIVO
 	if not is_moving:
@@ -180,8 +239,6 @@ func move_forward() -> void:
 	is_moving = true
 
 	play_variation()
-	if randf() < extra_step_chance:
-		_play_extra_step_delayed()
 
 	var tween := create_tween()
 	tween.tween_property(
@@ -242,15 +299,6 @@ func play_variation():
 	step_player.pitch_scale = lerp(0.6, 1.1, randf())
 	step_player.volume_db = lerp(-8.0, -4.0, randf())
 	step_player.play()
-
-func _play_extra_step_delayed() -> void:
-	var delay := randf_range(extra_step_delay_min, extra_step_delay_max)
-	await get_tree().create_timer(delay).timeout
-
-	step_player_extra.stop()
-	step_player_extra.pitch_scale = lerp(0.2, 0.4, randf())
-	step_player_extra.play()
-	print("I was hiding")
 	
 
 # =====================================================
@@ -261,8 +309,6 @@ func switch_flashlight() -> void:
 	flashlight.visible = flashlight_on
 
 func update_flashlight_aim() -> void:
-	if not flashlight_on:
-		return
 
 	flashlight_root.rotation = flashlight_base_rotation + Vector3(
 		mouse_rotation.x,
@@ -282,10 +328,61 @@ func update_flashlight_wobble(delta: float) -> void:
 			flashlight_base_position,
 			delta * 10.0
 		)
+var sanity_delay := 1.0
+var sanity_timer := 0.0
+
+var low_battery := false
+var blink_time := 0.0
+const BLINK_SPEED := 0.3
+var battery_bars: Array[Control] = []
+var health_bars: Array[Control] = []
+const MAX_BARS := 5
+
+func update_battery_bars() -> void:
+	var bars_on := int(ceil(battery / 20.0))
+	bars_on = clamp(bars_on, 0, MAX_BARS)
+
+	for i in range(MAX_BARS):
+		battery_bars[i].visible = i < bars_on
+
+func update_health_bars() -> void:
+	var bars_on := int(ceil(sanity / 20.0))
+	bars_on = clamp(bars_on, 0, MAX_BARS)
+
+	for i in range(MAX_BARS):
+		health_bars[i].visible = i < bars_on
+
+func update_battery_blink(delta: float) -> void:
+	low_battery = battery <= 20 and battery > 0
+
+	if not low_battery:
+		# Asegura que la última barrita esté visible
+		if battery_bars.size() > 0:
+			battery_bars[0].visible = battery > 0
+		return
+
+	blink_time += delta
+	if blink_time >= BLINK_SPEED:
+		blink_time = 0.0
+		# Parpadea la ÚLTIMA barrita
+		battery_bars[0].visible = !battery_bars[0].visible
+
 
 func _process(delta: float) -> void:
-	if not flashlight_on:
-		print("Crazy?")
-		sanity -= 1
+	sanity_timer += delta
+	if sanity_timer >= sanity_delay:
+		sanity_timer = 0.0
+
+		if not flashlight_on:
+			sanity -= 1
+		else:
+			sanity += 1
+			battery -= 1
+
+		sanity = clamp(sanity, 0, 100)
+		battery = clamp(battery, 0, 100)
+
 		update_sanity()
-	pass
+		update_battery()
+		update_battery_bars()
+		update_health_bars()

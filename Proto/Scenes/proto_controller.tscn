@@ -44,7 +44,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
 [node name="Flashlight" parent="Head/Camera3D" instance=ExtResource("2_ivtui")]
-transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.25495422, -0.35414028, -0.16254231)
+transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.255, -0.214, -0.25)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0, 0.14734915, 0)
@@ -64,6 +64,24 @@ collide_with_areas = true
 debug_shape_custom_color = Color(0, 0.92941177, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BatteryBar" type="HBoxContainer" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 15.0
+offset_top = 20.0
+offset_right = 55.0
+offset_bottom = 60.0
+scale = Vector2(2.5, 2.5)
+theme_override_constants/separation = 10
+
+[node name="HealthBar" type="HBoxContainer" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 913.99994
+offset_top = 17.000008
+offset_right = 1003.99994
+offset_bottom = 57.000008
+scale = Vector2(2.5, 2.5)
+theme_override_constants/separation = 10
 
 [node name="Battery" type="Label" parent="CanvasLayer"]
 offset_left = 11.0
