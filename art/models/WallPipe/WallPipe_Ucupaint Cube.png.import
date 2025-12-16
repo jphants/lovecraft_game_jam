@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blydswfg7rce1"
-path.s3tc="res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"
+uid="uid://ddmaaxmdjgqmp"
+path.s3tc="res://.godot/imported/WallPipe_Ucupaint Cube.png-511226d54db3bc364487b67f85c86ff2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "5dda3a9ead95f1d93f1bb46cc3873640"
+"md5": "6c5306012ebe288195c0bf47f5b3984a"
 }
 
 [deps]
 
-source_file="res://art/models/Stairs/Stair_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"]
+source_file="res://art/models/WallPipe/WallPipe_Ucupaint Cube.png"
+dest_files=["res://.godot/imported/WallPipe_Ucupaint Cube.png-511226d54db3bc364487b67f85c86ff2.s3tc.ctex"]
 
 [params]
 

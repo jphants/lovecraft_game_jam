@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blydswfg7rce1"
-path.s3tc="res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"
+uid="uid://be2vurvjcygvo"
+path.s3tc="res://.godot/imported/Pale_Ucupaint Cylinder Color.png-2c37b45132501ed4ddb3247047c22e96.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "5dda3a9ead95f1d93f1bb46cc3873640"
+"md5": "f11cfa89b2d0a7c53d3df2053426838b"
 }
 
 [deps]
 
-source_file="res://art/models/Stairs/Stair_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"]
+source_file="res://art/models/Pale/Pale_Ucupaint Cylinder Color.png"
+dest_files=["res://.godot/imported/Pale_Ucupaint Cylinder Color.png-2c37b45132501ed4ddb3247047c22e96.s3tc.ctex"]
 
 [params]
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blydswfg7rce1"
-path.s3tc="res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"
+uid="uid://weqcs1hfys17"
+path.s3tc="res://.godot/imported/FireExtinguisher_Cylinder Layer.png-ffe0b37a244788d9606b43484fbb0c17.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "5dda3a9ead95f1d93f1bb46cc3873640"
+"md5": "00fbcfe0597a8213b884f160670377c8"
 }
 
 [deps]
 
-source_file="res://art/models/Stairs/Stair_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"]
+source_file="res://art/models/FireExtinguisher/FireExtinguisher_Cylinder Layer.png"
+dest_files=["res://.godot/imported/FireExtinguisher_Cylinder Layer.png-ffe0b37a244788d9606b43484fbb0c17.s3tc.ctex"]
 
 [params]
 

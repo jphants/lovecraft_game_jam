@@ -3,13 +3,8 @@
 [resource]
 ambient_light_color = Color(0.98483354, 0.5838089, 0.87420607, 1)
 glow_enabled = true
-glow_strength = 0.0
-glow_bloom = 0.06
-glow_blend_mode = 1
-glow_hdr_threshold = 1.26
-glow_map_strength = 0.58
-fog_enabled = true
 fog_light_color = Color(0.20016658, 0.013982347, 0.055485487, 1)
+fog_light_energy = 0.84
 fog_density = 0.0387
 fog_height = 198.19
 fog_height_density = -11.0108

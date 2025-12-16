@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blydswfg7rce1"
-path.s3tc="res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"
+uid="uid://cjcmjb2pmqtcs"
+path.s3tc="res://.godot/imported/ElectricHazardPanel_Ucupaint Material Color.png-e8d98cfb47a6454a4fedb4f0b338fe8c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "5dda3a9ead95f1d93f1bb46cc3873640"
+"md5": "54b1e15169c161e4735a37aa6f656cb0"
 }
 
 [deps]
 
-source_file="res://art/models/Stairs/Stair_Ucupaint Material Color.png"
-dest_files=["res://.godot/imported/Stair_Ucupaint Material Color.png-447c15e7cd4ce349317b0ddbccf6ea47.s3tc.ctex"]
+source_file="res://art/models/ElectricHazardPanel/ElectricHazardPanel_Ucupaint Material Color.png"
+dest_files=["res://.godot/imported/ElectricHazardPanel_Ucupaint Material Color.png-e8d98cfb47a6454a4fedb4f0b338fe8c.s3tc.ctex"]
 
 [params]
 
