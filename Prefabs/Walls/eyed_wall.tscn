@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c082jisdx0t7k" path="res://Prefabs/Walls/eyed_wall.gd" id="1_1snpu"]
 [ext_resource type="Shader" uid="uid://cyrd2tkcgi1db" path="res://Shaders/eye_sprite_shader.gdshader" id="2_t12bb"]
-[ext_resource type="Texture2D" uid="uid://bq31a3d21ijny" path="res://art/Eyes/eyes1.png" id="2_xsqb2"]
+[ext_resource type="Texture2D" uid="uid://dx8lq1ckxeath" path="res://art/Eyes/2-removebg-preview.png" id="3_xsqb2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xxs16"]
 albedo_color = Color(0.46354657, 0.1964061, 0.19326323, 1)
@@ -15,7 +15,7 @@ material = SubResource("StandardMaterial3D_xxs16")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xsqb2"]
 render_priority = 0
 shader = ExtResource("2_t12bb")
-shader_parameter/sprite_sheet = ExtResource("2_xsqb2")
+shader_parameter/sprite_sheet = ExtResource("3_xsqb2")
 shader_parameter/columns = 6
 shader_parameter/rows = 5
 shader_parameter/frame = 0
@@ -28,7 +28,7 @@ script = ExtResource("1_1snpu")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 5.034732, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_as41m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -36,6 +36,6 @@ transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("BoxShape3D_xp605")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4365157, 0.5704684)
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0.026808321, 1.5376812, 0.50470424)
 material_override = SubResource("ShaderMaterial_xsqb2")
 mesh = SubResource("QuadMesh_p5fo3")
