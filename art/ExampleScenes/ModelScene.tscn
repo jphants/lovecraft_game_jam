@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://l7sbclutnmw2"]
+[gd_scene load_steps=41 format=3 uid="uid://l7sbclutnmw2"]
 
 [ext_resource type="PackedScene" uid="uid://d33greivnj2ak" path="res://art/models/Wall/Wall.glb" id="1_hn4ka"]
 [ext_resource type="PackedScene" uid="uid://luir7n4lc4mw" path="res://art/models/GroundTile/GroundTile.glb" id="2_y5pbv"]
@@ -29,6 +29,17 @@
 [ext_resource type="PackedScene" uid="uid://coud52hpxhy5l" path="res://art/models/Vines2/Vines2.glb" id="28_1scpy"]
 [ext_resource type="Environment" uid="uid://cmaopl1tlfbm5" path="res://art/CameraEnvironment.tres" id="28_u6ypf"]
 [ext_resource type="PackedScene" uid="uid://dr2yiqfj3x2xs" path="res://art/ModelPrefabs/WallEyePrefab.tscn" id="29_u6ypf"]
+[ext_resource type="PackedScene" uid="uid://l0dv1b1kjv4v" path="res://art/models/Vent/Vent.glb" id="30_1scpy"]
+[ext_resource type="PackedScene" uid="uid://bwp4slx3mj6q4" path="res://art/models/VentVines/VentVines.glb" id="31_fa5vc"]
+[ext_resource type="PackedScene" uid="uid://ng6kfoyewb07" path="res://art/models/VentVines2/VentVines2.glb" id="32_3uvvp"]
+[ext_resource type="PackedScene" uid="uid://ddrtpg53qxg6i" path="res://art/models/CielingVine/CielingVine.glb" id="33_sv0eg"]
+[ext_resource type="PackedScene" uid="uid://ce0cwjf2yih2y" path="res://art/models/FleshySack1/FleshySack1.glb" id="34_6h0fe"]
+[ext_resource type="PackedScene" uid="uid://pf8icrnvl6r6" path="res://art/models/Paper1/Paper1.glb" id="35_okaaq"]
+[ext_resource type="PackedScene" uid="uid://bb5ehnlbf6r60" path="res://art/models/Paper2/Paper2.glb" id="36_hi3w2"]
+[ext_resource type="PackedScene" uid="uid://dvachjlc0etn2" path="res://art/models/Paper3/Paper3.glb" id="37_ir0d2"]
+[ext_resource type="PackedScene" uid="uid://b217q1f3nhr6u" path="res://art/models/Paper4/Paper4.glb" id="38_78ex4"]
+[ext_resource type="PackedScene" uid="uid://dtti3ygptu2bo" path="res://art/models/Book1/Book1.glb" id="39_xa33l"]
+[ext_resource type="PackedScene" uid="uid://kysxyvpogp0i" path="res://art/models/VineBody2/VineBody2.glb" id="40_18b8k"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -318,3 +329,68 @@ script = ExtResource("23_hq6t4")
 light_energy = 3.549
 light_indirect_energy = 1.99
 light_volumetric_fog_energy = 1.495
+
+[node name="Vent" parent="." instance=ExtResource("30_1scpy")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15.965525, 0.9416981, 3.860095)
+
+[node name="VentVines" parent="." instance=ExtResource("31_fa5vc")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.247683, 1.0389923, 3.8918588)
+
+[node name="VentVines2" parent="." instance=ExtResource("31_fa5vc")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -15.867456, 0.8294884, 3.8918588)
+script = ExtResource("23_hq6t4")
+
+[node name="VentVines3" parent="." instance=ExtResource("32_3uvvp")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -16.027258, 1.1829114, 3.7900596)
+
+[node name="CielingVine" parent="." instance=ExtResource("33_sv0eg")]
+transform = Transform3D(0.36147818, 0, -0.93238056, 0, 1, 0, 0.93238056, 0, 0.36147818, -16.243847, 2.948286, 2.967629)
+
+[node name="FleshySack1" parent="." instance=ExtResource("34_6h0fe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.737474, 2.6602268, 0.66677594)
+
+[node name="FleshySack2" parent="." instance=ExtResource("34_6h0fe")]
+transform = Transform3D(0.9604834, 0, 0.2783374, 0, 1, 0, -0.2783374, 0, 0.9604834, -13.595196, 2.6602268, 2.3778946)
+
+[node name="Paper1" parent="." instance=ExtResource("35_okaaq")]
+transform = Transform3D(0.8452245, 0, -0.5344114, 0, 1, 0, 0.5344114, 0, 0.8452245, -15.574599, 0.1871115, -1.6278533)
+
+[node name="Paper2" parent="." instance=ExtResource("35_okaaq")]
+transform = Transform3D(0.5344113, 0, 0.8452245, 0, 1, 0, -0.8452245, 0, 0.5344113, -15.574599, 0.1871115, 0.37214673)
+
+[node name="Paper4" parent="." instance=ExtResource("35_okaaq")]
+transform = Transform3D(0.46478024, 0, -0.885426, 0, 1, 0, 0.885426, 0, 0.46478024, -17.385683, 0.1871115, -1.9102219)
+
+[node name="Paper5" parent="." instance=ExtResource("35_okaaq")]
+transform = Transform3D(0.46478024, 0, -0.885426, 0, 1, 0, 0.885426, 0, 0.46478024, -17.385683, 0.1871115, 2.3999224)
+
+[node name="Paper6" parent="." instance=ExtResource("35_okaaq")]
+transform = Transform3D(0.885426, 0, 0.46478027, 0, 1, 0, -0.46478027, 0, 0.885426, -17.385683, 0.1871115, 3.1028013)
+
+[node name="Paper7" parent="." instance=ExtResource("36_hi3w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.244736, 0.19907022, 2.6260483)
+
+[node name="Paper8" parent="." instance=ExtResource("36_hi3w2")]
+transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, -17.476124, 0.19907022, 0.60680175)
+
+[node name="Paper9" parent="." instance=ExtResource("36_hi3w2")]
+transform = Transform3D(-0.8660253, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660253, -14.465017, 0.19907022, -3.716225)
+
+[node name="Paper10" parent="." instance=ExtResource("36_hi3w2")]
+transform = Transform3D(-0.8660253, 0, 0.50000006, 0, 1, 0, -0.50000006, 0, -0.8660253, -14.465017, 0.19907022, 3.0322983)
+
+[node name="Paper11" parent="." instance=ExtResource("37_ir0d2")]
+transform = Transform3D(0.48702154, 0, -0.87338996, 0, 1, 0, 0.87338996, 0, 0.48702154, -17.006794, 0.2094394, 1.9937301)
+
+[node name="Paper12" parent="." instance=ExtResource("38_78ex4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.31862, 0.17719829, 1.3099679)
+
+[node name="VineBody2" parent="." instance=ExtResource("40_18b8k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.861539, 0.101635695, 0.18659973)
+script = ExtResource("23_hq6t4")
+
+[node name="Paper3" parent="VineBody2" instance=ExtResource("35_okaaq")]
+transform = Transform3D(0.9755498, 0, 0.21977809, 0, 1, 0, -0.21977809, 0, 0.9755498, -0.76409054, 0.0854758, 1.2973031)
+
+[node name="Book1" parent="VineBody2" instance=ExtResource("39_xa33l")]
+transform = Transform3D(0.9030881, 0, 0.42945534, 0, 1, 0, -0.42945534, 0, 0.9030881, 0.21743774, 0.17792594, 1.7073139)
