@@ -65,6 +65,13 @@ debug_shape_custom_color = Color(0, 0.92941177, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Battery" type="Label" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 583.0
+offset_right = 79.0
+offset_bottom = 606.0
+text = "BATTERY"
+
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -81,6 +88,13 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="CanvasLayer/BoxContainer"]
 layout_mode = 2
 text = "Seems like a interactive object..."
+
+[node name="Sanity" type="Label" parent="CanvasLayer"]
+offset_left = 11.0
+offset_top = 615.0
+offset_right = 67.0
+offset_bottom = 638.0
+text = "SANITY"
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ps2fd")

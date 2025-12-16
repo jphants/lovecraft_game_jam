@@ -42,6 +42,11 @@ extends CharacterBody3D
 @onready var step_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var step_player_extra: AudioStreamPlayer3D = $AudioStreamPlayer3D2
 
+@onready var battery_label: Label = $CanvasLayer/Battery
+@onready var sanity_label: Label = $CanvasLayer/Sanity
+
+@export var battery = Global.battery
+@export var sanity = Global.sanity
 # =====================================================
 # ESTADO
 # =====================================================
@@ -59,12 +64,21 @@ var flashlight_base_rotation: Vector3
 var wobble_time := 0.0
 var mouse_rotation := Vector2.ZERO
 
+func update_battery():
+	battery_label.text = "Battery: " + str(battery)
+	
+func update_sanity():
+	sanity_label.text = "Sanity: " + str(sanity)
+
 # =====================================================
 # READY
 # =====================================================
 func _ready() -> void:
+	update_battery()
+	update_sanity()
+	
 	randomize()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
 
 	SeeCast.enabled = true
 	flashlight_base_position = flashlight_root.position
@@ -268,3 +282,10 @@ func update_flashlight_wobble(delta: float) -> void:
 			flashlight_base_position,
 			delta * 10.0
 		)
+
+func _process(delta: float) -> void:
+	if not flashlight_on:
+		print("Crazy?")
+		sanity -= 1
+		update_sanity()
+	pass
