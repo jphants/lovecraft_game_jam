@@ -13,6 +13,8 @@ material = SubResource("StandardMaterial3D_gtpis")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6574516, 0)
+visible = false
 mesh = SubResource("BoxMesh_mdgnv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]

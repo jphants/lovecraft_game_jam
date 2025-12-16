@@ -49,11 +49,6 @@ shape = SubResource("BoxShape3D_6set6")
 
 [node name="ProtoController" parent="." instance=ExtResource("2_rc72b")]
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0138152, -1.3018038)
-text = "TO DO:
-PUT THE WAREHOUSE ENTRY AND LOAD THE FIRST AREA"
-
 [node name="Teleporter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9513826, 0, -19.64404)
 

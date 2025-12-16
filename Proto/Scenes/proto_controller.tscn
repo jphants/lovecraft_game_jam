@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=8 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://cyb1cvml6xw75" path="res://Proto/Scripts/proto_controller.gd" id="1_kop0b"]
 [ext_resource type="PackedScene" uid="uid://cgknfp16nc5w1" path="res://art/models/Flashlight.glb" id="2_ivtui"]
+[ext_resource type="AudioStream" uid="uid://mmhhgmuoriac" path="res://Audio/footstep.mp3" id="3_ps2fd"]
+[ext_resource type="AudioStream" uid="uid://co42lbocpwqtw" path="res://Audio/wet_hit.mp3" id="4_kktod"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -17,12 +19,14 @@ height = 1.8
 [node name="ProtoController" type="CharacterBody3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_kop0b")
+step_distance = 1.0
 move_duration = 0.4
 rotate_duration = 0.5
 input_left = "m_left"
 input_right = "m_right"
 input_forward = "m_up"
 input_back = "m_down"
+wobble_speed = 1.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -44,8 +48,8 @@ transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.234
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0, 0.14734915, 0)
-spot_range = 6.4118547
-spot_angle = 31.097908
+spot_range = 2.8480017
+spot_angle = 59.92654
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0.0019771457, 0.10928576, 0.14311671)
@@ -77,3 +81,12 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="CanvasLayer/BoxContainer"]
 layout_mode = 2
 text = "Seems like a interactive object..."
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ps2fd")
+volume_db = -10.0
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 7.933007)
+stream = ExtResource("4_kktod")
+pitch_scale = 0.35
