@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://l7sbclutnmw2"]
+[gd_scene load_steps=42 format=3 uid="uid://l7sbclutnmw2"]
 
 [ext_resource type="PackedScene" uid="uid://d33greivnj2ak" path="res://art/models/Wall/Wall.glb" id="1_hn4ka"]
 [ext_resource type="PackedScene" uid="uid://luir7n4lc4mw" path="res://art/models/GroundTile/GroundTile.glb" id="2_y5pbv"]
@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://b217q1f3nhr6u" path="res://art/models/Paper4/Paper4.glb" id="38_78ex4"]
 [ext_resource type="PackedScene" uid="uid://dtti3ygptu2bo" path="res://art/models/Book1/Book1.glb" id="39_xa33l"]
 [ext_resource type="PackedScene" uid="uid://kysxyvpogp0i" path="res://art/models/VineBody2/VineBody2.glb" id="40_18b8k"]
+[ext_resource type="Texture2D" uid="uid://0wfbg21km23b" path="res://art/Decals/EldritchSymbol.png" id="41_oebrg"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -215,7 +216,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.5004826, 0)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 1.5004826, 2)
 
 [node name="Wall8" parent="." instance=ExtResource("1_hn4ka")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12.146718, 1.5004826, 3.9626303)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -12.151105, 1.500483, 3.9701977)
 
 [node name="Wall9" parent="." instance=ExtResource("1_hn4ka")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -16.146717, 1.5004826, 3.9626303)
@@ -394,3 +395,10 @@ transform = Transform3D(0.9755498, 0, 0.21977809, 0, 1, 0, -0.21977809, 0, 0.975
 
 [node name="Book1" parent="VineBody2" instance=ExtResource("39_xa33l")]
 transform = Transform3D(0.9030881, 0, 0.42945534, 0, 1, 0, -0.42945534, 0, 0.9030881, 0.21743774, 0.17792594, 1.7073139)
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.9538787, -0.12940954, 0.27086616, -0.237953, 0.22414388, 0.94505966, -0.18301272, -0.9659258, 0.1830127, -15.929706, 2.1416655, 3.895984)
+size = Vector3(1, 0.28125, 1)
+texture_albedo = ExtResource("41_oebrg")
+texture_normal = ExtResource("41_oebrg")
+texture_emission = ExtResource("41_oebrg")
