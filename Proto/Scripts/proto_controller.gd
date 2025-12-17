@@ -16,6 +16,7 @@ extends CharacterBody3D
 @export var input_forward : String = "ui_up"
 @export var input_back : String = "ui_down"
 @export var input_flashlight : String = "flashlight"
+@export var input_pause : String = "ui_pause"
 
 @export_group("Flashlight Mouse")
 @export var mouse_sensitivity := 0.002
@@ -28,7 +29,7 @@ extends CharacterBody3D
 @export_group("Footsteps")
 
 @export var forward_repeat_delay := 0.18
-
+var fixed_height : float
 # =====================================================
 # NODOS
 # =====================================================
@@ -49,6 +50,8 @@ extends CharacterBody3D
 
 const BATTERY_BAR = preload("uid://ddr11jpuud2e2")
 const HEALTH_BAR = preload("uid://bxyalmprwy2cc")
+
+@onready var panelPause: Panel = $CanvasLayer/Control/Panel
 
 @onready var camera_3d: Camera3D = $Head/Camera3D
 
@@ -128,6 +131,9 @@ func setup_health_bars() -> void:
 # =====================================================
 
 func _ready() -> void:
+	fixed_height = global_position.y
+	camera_base_pos = camera_3d.position
+
 	update_battery()
 	update_sanity()
 	
@@ -149,6 +155,7 @@ func _ready() -> void:
 	)
 	global_position = grid_to_world(grid_position)
 
+var show_menu : bool = false
 # =====================================================
 # INPUT
 # =====================================================
@@ -161,7 +168,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			deg_to_rad(-max_vertical_angle),
 			deg_to_rad(max_vertical_angle)
 		)
-
 	if is_moving:
 		return
 
@@ -173,6 +179,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		move_backward()
 	elif event.is_action_pressed(input_flashlight):
 		switch_flashlight()
+		
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(input_pause):
+		show_menu = !show_menu
+		if show_menu:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			panelPause.show()
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			panelPause.hide()
 
 # =====================================================
 # PHYSICS
@@ -214,7 +231,7 @@ func _physics_process(delta: float) -> void:
 func grid_to_world(g: Vector2i) -> Vector3:
 	return Vector3(
 		g.x * step_distance,
-		global_position.y,
+		fixed_height,  # 🔒 altura fija
 		g.y * step_distance
 	)
 
@@ -386,3 +403,7 @@ func _process(delta: float) -> void:
 		update_battery()
 		update_battery_bars()
 		update_health_bars()
+
+
+func _on_quit_game_pressed() -> void:
+	get_tree().quit()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=10 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://cyb1cvml6xw75" path="res://Proto/Scripts/proto_controller.gd" id="1_kop0b"]
 [ext_resource type="PackedScene" uid="uid://cgknfp16nc5w1" path="res://art/models/Flashlight.glb" id="2_ivtui"]
 [ext_resource type="Environment" uid="uid://cmaopl1tlfbm5" path="res://art/CameraEnvironment.tres" id="2_l2b5l"]
 [ext_resource type="AudioStream" uid="uid://mmhhgmuoriac" path="res://Audio/footstep.mp3" id="3_ps2fd"]
+[ext_resource type="FontFile" uid="uid://brtp62oydrsyn" path="res://Fonts/veteran typewriter.ttf" id="4_5oats"]
 [ext_resource type="AudioStream" uid="uid://co42lbocpwqtw" path="res://Audio/wet_hit.mp3" id="4_kktod"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
@@ -43,6 +44,7 @@ shape = SubResource("CapsuleShape3D_iof21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.568143, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.0943458, 0.1435616)
 environment = ExtResource("2_l2b5l")
 
 [node name="Flashlight" parent="Head/Camera3D" instance=ExtResource("2_ivtui")]
@@ -116,6 +118,45 @@ offset_right = 67.0
 offset_bottom = 638.0
 text = "SANITY"
 
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 140.5
+offset_top = 63.0
+offset_right = 971.5
+offset_bottom = 545.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="QuitGame" type="Button" parent="CanvasLayer/Control/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.5
+offset_top = 136.0
+offset_right = 162.5
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_5oats")
+theme_override_font_sizes/font_size = 66
+text = "QUIT GAME"
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ps2fd")
 volume_db = -10.0
@@ -124,3 +165,5 @@ volume_db = -10.0
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 7.933007)
 stream = ExtResource("4_kktod")
 pitch_scale = 0.35
+
+[connection signal="pressed" from="CanvasLayer/Control/Panel/QuitGame" to="." method="_on_quit_game_pressed"]

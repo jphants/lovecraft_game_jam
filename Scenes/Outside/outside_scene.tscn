@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://Proto/Scenes/proto_controller.tscn" id="2_rc72b"]
 [ext_resource type="Script" uid="uid://6cwwmoou8wgg" path="res://Scenes/Outside/teleporter.gd" id="3_hgy54"]
 [ext_resource type="PackedScene" uid="uid://ddofrga67pgaf" path="res://Dungeon Generation/Dungeon_generator.tscn" id="4_6set6"]
-[ext_resource type="Script" path="res://Scenes/Outside/interactive_object.gd" id="5_evuug"]
+[ext_resource type="Script" uid="uid://dndlw1yho4l0d" path="res://Scenes/Outside/interactive_object.gd" id="5_evuug"]
 [ext_resource type="PackedScene" uid="uid://0xv2stsxta43" path="res://art/models/Warehouse/WarehouseOutside.glb" id="6_ganml"]
 [ext_resource type="PackedScene" uid="uid://dh73av31t6q37" path="res://Prefabs/Environment/FencesPrefab.tscn" id="7_hk1ni"]
 [ext_resource type="PackedScene" uid="uid://d24wcer751x0u" path="res://Prefabs/Environment/GarbageDumpClosedPrefab.tscn" id="9_lw8ss"]
@@ -58,6 +58,7 @@ mesh = SubResource("BoxMesh_hgy54")
 shape = SubResource("BoxShape3D_6set6")
 
 [node name="ProtoController" parent="." instance=ExtResource("2_rc72b")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.04159373, 0)
 
 [node name="Teleporter" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9513826, 0, -19.64404)
