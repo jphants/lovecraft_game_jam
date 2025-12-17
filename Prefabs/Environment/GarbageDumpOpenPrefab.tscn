@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2heavt75x5ps"]
+
+[ext_resource type="PackedScene" uid="uid://cn07sjqckng6h" path="res://art/models/GarbageOpen/GarbageDumpOpen.glb" id="1_y7mx1"]
+
+[node name="GarbageDumpOpen" instance=ExtResource("1_y7mx1")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1756897, 0)
+visible = false
+use_collision = true
+size = Vector3(1.785, 2.390564, 2.27)
