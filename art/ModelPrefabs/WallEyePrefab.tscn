@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr2yiqfj3x2xs"]
+
+[ext_resource type="Script" uid="uid://b4mv66hex8yyi" path="res://art/ModelScripts/WallEye.gd" id="1_nyvyo"]
+[ext_resource type="PackedScene" uid="uid://be8hmjcqfg2qp" path="res://art/models/WallEye/WallEye.glb" id="2_vqljw"]
+
+[node name="WallEyePrefab" type="Node3D"]
+script = ExtResource("1_nyvyo")
+
+[node name="WallEye" parent="." instance=ExtResource("2_vqljw")]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="animation_finished" from="WallEye/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="WallEye"]

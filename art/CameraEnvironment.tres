@@ -1,0 +1,15 @@
+[gd_resource type="Environment" format=3 uid="uid://cmaopl1tlfbm5"]
+
+[resource]
+ambient_light_color = Color(0.98483354, 0.5838089, 0.87420607, 1)
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.20016658, 0.013982347, 0.055485487, 1)
+fog_light_energy = 0.84
+fog_density = 0.0387
+fog_height = 198.19
+fog_height_density = -11.0108
+volumetric_fog_density = 0.0285
+volumetric_fog_albedo = Color(0.42463294, 0.08659912, 0.06904476, 1)
+volumetric_fog_emission = Color(0.22764328, 0.2355549, 0.4461245, 1)
+volumetric_fog_length = 152.09
