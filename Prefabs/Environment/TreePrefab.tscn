@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvgivpvjdvl75"]
+
+[ext_resource type="PackedScene" uid="uid://bb8l3daajy5a3" path="res://art/models/Tree/Tree.glb" id="1_p442s"]
+
+[node name="Tree" instance=ExtResource("1_p442s")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="1"]
+visible = false
+use_collision = true
