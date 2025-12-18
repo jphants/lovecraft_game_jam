@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3fs75ctbakxx"]
+[gd_scene load_steps=6 format=3 uid="uid://c3fs75ctbakxx"]
 
 [ext_resource type="Script" uid="uid://cslxj41h0bk8x" path="res://UI/menu.gd" id="1_0h2wq"]
+[ext_resource type="Texture2D" uid="uid://v80cisabb00o" path="res://art/Sprites/spoiler.png" id="2_qmqfe"]
+[ext_resource type="FontFile" uid="uid://bojnafppfst52" path="res://Fonts/Fifties Movies.ttf" id="2_wfiwe"]
+[ext_resource type="FontFile" uid="uid://brtp62oydrsyn" path="res://Fonts/veteran typewriter.ttf" id="3_4hkxj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hkxj"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.12156863, 0.12156863, 0.12156863, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,39 +26,161 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0h2wq")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qmqfe")
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -72.0
-offset_right = 72.0
-offset_bottom = 46.0
+offset_left = -443.0
+offset_top = 73.0
+offset_right = 443.0
+offset_bottom = 179.0
 grow_horizontal = 2
-text = "GAME TITLE"
+theme_override_fonts/normal_font = ExtResource("2_wfiwe")
+theme_override_font_sizes/normal_font_size = 116
+text = "The warehouse"
 fit_content = true
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -154.5
+offset_top = -403.0
+offset_right = 154.5
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 14
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 71
+text = "PLAY"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 71
+text = "SETTINGS"
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 71
+text = "CREDITS"
+
+[node name="Exit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 71
+text = "EXIT"
+
+[node name="Credits" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_left = -501.0
+offset_top = -296.25
+offset_right = 501.0
+offset_bottom = 296.25
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4hkxj")
 
-[node name="Start" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "PLAY"
+[node name="CloseCredits" type="Button" parent="Credits"]
+layout_mode = 0
+offset_left = 917.0
+offset_top = 13.25
+offset_right = 986.0
+offset_bottom = 104.25
+theme_override_fonts/font = ExtResource("2_wfiwe")
+theme_override_font_sizes/font_size = 91
+text = "X"
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "SETTINGS"
+[node name="Label" type="Label" parent="Credits"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 39.25
+offset_right = 721.0
+offset_bottom = 586.25
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 46
+text = "Special thanks to:
+Someone 1
+Someone 1
+Someone 1
+Someone 1
+
+Fonts:
+Fifties movies
+Veteran typewriter
+"
+
+[node name="Settings" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -504.0
+offset_top = -296.25
+offset_right = 504.0
+offset_bottom = 296.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4hkxj")
+
+[node name="CloseSettings" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 13.25
+offset_right = 989.0
+offset_bottom = 104.25
+theme_override_fonts/font = ExtResource("2_wfiwe")
+theme_override_font_sizes/font_size = 91
+text = "X"
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 40.25
+offset_right = 747.0
+offset_bottom = 565.25
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 56
+text = "CONTROLS:
+W = Move forward
+A = Turn Left
+S = Move backwards
+D = Turn Right
+F = Flashlight
+MOUSE = Aim flashlight
+"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Credits/CloseCredits" to="." method="_on_close_credits_pressed"]
+[connection signal="pressed" from="Settings/CloseSettings" to="." method="_on_close_settings_pressed"]

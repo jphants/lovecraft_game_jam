@@ -16,6 +16,7 @@ extends CharacterBody3D
 @export var input_forward : String = "ui_up"
 @export var input_back : String = "ui_down"
 @export var input_flashlight : String = "flashlight"
+@export var input_pause : String = "ui_pause"
 
 @export_group("Flashlight Mouse")
 @export var mouse_sensitivity := 0.002
@@ -28,7 +29,7 @@ extends CharacterBody3D
 @export_group("Footsteps")
 
 @export var forward_repeat_delay := 0.18
-
+var fixed_height : float
 # =====================================================
 # NODOS
 # =====================================================
@@ -50,6 +51,8 @@ extends CharacterBody3D
 const BATTERY_BAR = preload("uid://ddr11jpuud2e2")
 const HEALTH_BAR = preload("uid://bxyalmprwy2cc")
 
+@onready var panelPause: Panel = $CanvasLayer/Control/Panel
+
 @onready var camera_3d: Camera3D = $Head/Camera3D
 
 # Camera shake por sanity
@@ -57,8 +60,8 @@ var camera_base_pos: Vector3
 var shake_time := 0.0
 
 @export_group("Camera Shake")
-@export var max_shake_strength := 0.02
-@export var shake_speed := 9.0
+@export var max_shake_strength := 0.01
+@export var shake_speed := 4.0
 
 func update_camera_shake(delta: float) -> void:
 	# Normaliza sanity (1 = sano, 0 = loco)
@@ -99,12 +102,6 @@ var flashlight_base_rotation: Vector3
 var wobble_time := 0.0
 var mouse_rotation := Vector2.ZERO
 
-func update_battery():
-	battery_label.text = "Battery: " + str(battery)
-	
-func update_sanity():
-	sanity_label.text = "Sanity: " + str(sanity)
-
 func setup_battery_bars() -> void:
 	for i in range(MAX_BARS):
 		var bar := TextureRect.new()
@@ -128,8 +125,8 @@ func setup_health_bars() -> void:
 # =====================================================
 
 func _ready() -> void:
-	update_battery()
-	update_sanity()
+	fixed_height = global_position.y
+	camera_base_pos = camera_3d.position
 	
 	setup_battery_bars()
 	setup_health_bars()
@@ -149,6 +146,7 @@ func _ready() -> void:
 	)
 	global_position = grid_to_world(grid_position)
 
+var show_menu : bool = false
 # =====================================================
 # INPUT
 # =====================================================
@@ -161,7 +159,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			deg_to_rad(-max_vertical_angle),
 			deg_to_rad(max_vertical_angle)
 		)
-
 	if is_moving:
 		return
 
@@ -171,8 +168,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_step(-90)
 	elif event.is_action_pressed(input_back):
 		move_backward()
-	elif event.is_action_pressed(input_flashlight):
+	elif event.is_action_pressed(input_flashlight) and battery > 0:
 		switch_flashlight()
+		
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed(input_pause):
+		show_menu = !show_menu
+
+		if show_menu:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			panelPause.show()
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			panelPause.hide()
+
 
 # =====================================================
 # PHYSICS
@@ -207,6 +217,11 @@ func _physics_process(delta: float) -> void:
 	# 🔒 SNAP DEFENSIVO
 	if not is_moving:
 		global_position = grid_to_world(grid_position)
+		
+	if battery <= 0 and flashlight_on:
+		flashlight_on = false
+		flashlight.visible = false
+
 
 # =====================================================
 # GRID HELPERS
@@ -214,7 +229,7 @@ func _physics_process(delta: float) -> void:
 func grid_to_world(g: Vector2i) -> Vector3:
 	return Vector3(
 		g.x * step_distance,
-		global_position.y,
+		fixed_height,  # 🔒 altura fija
 		g.y * step_distance
 	)
 
@@ -382,7 +397,9 @@ func _process(delta: float) -> void:
 		sanity = clamp(sanity, 0, 100)
 		battery = clamp(battery, 0, 100)
 
-		update_sanity()
-		update_battery()
 		update_battery_bars()
 		update_health_bars()
+
+
+func _on_quit_game_pressed() -> void:
+	get_tree().quit()
