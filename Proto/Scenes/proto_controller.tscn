@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bs72ogkvdd7d6"]
+[gd_scene load_steps=9 format=3 uid="uid://bs72ogkvdd7d6"]
 
 [ext_resource type="Script" uid="uid://cyb1cvml6xw75" path="res://Proto/Scripts/proto_controller.gd" id="1_kop0b"]
 [ext_resource type="PackedScene" uid="uid://cgknfp16nc5w1" path="res://art/models/Flashlight.glb" id="2_ivtui"]
 [ext_resource type="Environment" uid="uid://cmaopl1tlfbm5" path="res://art/CameraEnvironment.tres" id="2_l2b5l"]
 [ext_resource type="AudioStream" uid="uid://mmhhgmuoriac" path="res://Audio/footstep.mp3" id="3_ps2fd"]
 [ext_resource type="FontFile" uid="uid://brtp62oydrsyn" path="res://Fonts/veteran typewriter.ttf" id="4_5oats"]
-[ext_resource type="AudioStream" uid="uid://co42lbocpwqtw" path="res://Audio/wet_hit.mp3" id="4_kktod"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -52,6 +51,7 @@ transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.234
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Head/Camera3D/Flashlight"]
 transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0, 0.14734915, 0)
+light_color = Color(1, 1, 0, 1)
 spot_range = 2.8480017
 spot_angle = 59.92654
 
@@ -79,6 +79,7 @@ scale = Vector2(2.5, 2.5)
 theme_override_constants/separation = 10
 
 [node name="HealthBar" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
 texture_filter = 1
 offset_left = 913.99994
 offset_top = 17.000008
@@ -86,13 +87,6 @@ offset_right = 1003.99994
 offset_bottom = 57.000008
 scale = Vector2(2.5, 2.5)
 theme_override_constants/separation = 10
-
-[node name="Battery" type="Label" parent="CanvasLayer"]
-offset_left = 11.0
-offset_top = 583.0
-offset_right = 79.0
-offset_bottom = 606.0
-text = "BATTERY"
 
 [node name="BoxContainer" type="BoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
@@ -110,13 +104,6 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="CanvasLayer/BoxContainer"]
 layout_mode = 2
 text = "Seems like a interactive object..."
-
-[node name="Sanity" type="Label" parent="CanvasLayer"]
-offset_left = 11.0
-offset_top = 615.0
-offset_right = 67.0
-offset_bottom = 638.0
-text = "SANITY"
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -160,10 +147,5 @@ text = "QUIT GAME"
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ps2fd")
 volume_db = -10.0
-
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 7.933007)
-stream = ExtResource("4_kktod")
-pitch_scale = 0.35
 
 [connection signal="pressed" from="CanvasLayer/Control/Panel/QuitGame" to="." method="_on_quit_game_pressed"]

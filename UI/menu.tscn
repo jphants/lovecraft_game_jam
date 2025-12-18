@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3fs75ctbakxx"]
+[gd_scene load_steps=6 format=3 uid="uid://c3fs75ctbakxx"]
 
 [ext_resource type="Script" uid="uid://cslxj41h0bk8x" path="res://UI/menu.gd" id="1_0h2wq"]
+[ext_resource type="Texture2D" uid="uid://v80cisabb00o" path="res://art/Sprites/spoiler.png" id="2_qmqfe"]
 [ext_resource type="FontFile" uid="uid://bojnafppfst52" path="res://Fonts/Fifties Movies.ttf" id="2_wfiwe"]
 [ext_resource type="FontFile" uid="uid://brtp62oydrsyn" path="res://Fonts/veteran typewriter.ttf" id="3_4hkxj"]
 
@@ -24,6 +25,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0h2wq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qmqfe")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -106,6 +116,25 @@ theme_override_fonts/font = ExtResource("2_wfiwe")
 theme_override_font_sizes/font_size = 91
 text = "X"
 
+[node name="Label" type="Label" parent="Credits"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 39.25
+offset_right = 721.0
+offset_bottom = 586.25
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 46
+text = "Special thanks to:
+Someone 1
+Someone 1
+Someone 1
+Someone 1
+
+Fonts:
+Fifties movies
+Veteran typewriter
+"
+
 [node name="Settings" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -131,6 +160,23 @@ offset_bottom = 104.25
 theme_override_fonts/font = ExtResource("2_wfiwe")
 theme_override_font_sizes/font_size = 91
 text = "X"
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 40.25
+offset_right = 747.0
+offset_bottom = 565.25
+theme_override_fonts/font = ExtResource("3_4hkxj")
+theme_override_font_sizes/font_size = 56
+text = "CONTROLS:
+W = Move forward
+A = Turn Left
+S = Move backwards
+D = Turn Right
+F = Flashlight
+MOUSE = Aim flashlight
+"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]

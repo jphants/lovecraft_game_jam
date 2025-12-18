@@ -1,8 +1,13 @@
 extends Node
 
+var level: int = 1
 var floor: int = 0
 var battery: int = 100
 var sanity: int = 100
+
+func reset():
+	level = 0
+	floor = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
