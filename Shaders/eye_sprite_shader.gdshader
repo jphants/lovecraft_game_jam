@@ -6,8 +6,6 @@ uniform int rows = 5;
 uniform int frame = 0;
 
 void fragment() {
-    int total_frames = columns * rows;
-
     int col = frame % columns;
     int row = frame / columns;
 
@@ -15,6 +13,8 @@ void fragment() {
     vec2 uv = UV * frame_size;
     uv += vec2(float(col), float(row)) * frame_size;
 
-    ALBEDO = texture(sprite_sheet, uv).rgb;
-    ALPHA = texture(sprite_sheet, uv).a;
+    vec4 tex = texture(sprite_sheet, uv);
+
+    ALBEDO = vec3(0.0); // negro puro
+    ALPHA = tex.a;      // mantiene la transparencia
 }
