@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://crmsdyjcfhifb"]
+
+[ext_resource type="Script" uid="uid://cikh31ul8wqei" path="res://Prefabs/Floors/vined_floor.gd" id="1_b1ypq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b1ypq"]
+
+[node name="Vined Floor" type="Node3D"]
+script = ExtResource("1_b1ypq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_b1ypq")
+
+[node name="Deco" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.517, 0)

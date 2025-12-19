@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdip2pbfjlgq1"]
+
+[ext_resource type="Script" uid="uid://d3esyc0ay7sgb" path="res://Prefabs/Traps/vined_floor.gd" id="1_v7kkr"]
+[ext_resource type="PackedScene" uid="uid://luir7n4lc4mw" path="res://art/models/GroundTile/GroundTile.glb" id="2_uplgt"]
+[ext_resource type="PackedScene" uid="uid://w5xufbidx8tk" path="res://art/models/CielingTile/CielingTile.glb" id="3_m2kuk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yixb4"]
+
+[node name="VinedCeiling" type="Node3D"]
+script = ExtResource("1_v7kkr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_yixb4")
+
+[node name="GroundTile" parent="StaticBody3D" instance=ExtResource("2_uplgt")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.45709848, 0)
+
+[node name="CielingTile" parent="StaticBody3D" instance=ExtResource("3_m2kuk")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2.5, 0)
+
+[node name="Deco" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5991185, 0)

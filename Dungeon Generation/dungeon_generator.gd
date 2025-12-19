@@ -154,7 +154,7 @@ func build_all() -> void:
 			if grid[z][x] == 1 or grid[z][x] == 2:
 				spawn(pick_weighted(floors), pos)
 
-			if grid[z][x] == 2:
+			if grid[z][x] == 2 and randf() < 0.15:
 				spawn(pick_weighted(room_items), pos)
 
 			if grid[z][x] == 0 and has_floor_neighbor(x, z):
@@ -163,13 +163,15 @@ func build_all() -> void:
 	build_start_end()
 
 func has_floor_neighbor(x:int, z:int) -> bool:
-	for dz in [-1, 0, 1]:
-		for dx in [-1, 0, 1]:
-			var nx: int = x + dx
-			var nz: int = z + dz
-			if nx >= 0 and nz >= 0 and nx < width and nz < height:
-				if grid[nz][nx] > 0:
-					return true
+	if x > 0 and grid[z][x - 1] > 0:
+		return true
+	if x < width - 1 and grid[z][x + 1] > 0:
+		return true
+	if z > 0 and grid[z - 1][x] > 0:
+		return true
+	if z < height - 1 and grid[z + 1][x] > 0:
+		return true
+
 	return false
 
 func build_start_end() -> void:
