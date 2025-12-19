@@ -1,4 +1,4 @@
-[gd_resource type="Environment" load_steps=0 format=3 uid="uid://cmaopl1tlfbm5"]
+[gd_resource type="Environment" format=3 uid="uid://cmaopl1tlfbm5"]
 
 [resource]
 ambient_light_color = Color(0.98483354, 0.5838089, 0.87420607, 1)

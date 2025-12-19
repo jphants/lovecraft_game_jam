@@ -1,8 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://vekoyyt82mvb"]
+[gd_scene load_steps=5 format=3 uid="uid://vekoyyt82mvb"]
 
-[ext_resource type="Script" uid="uid://6cwwmoou8wgg" path="res://Scenes/Outside/teleporter.gd" id="1_hr525"]
-[ext_resource type="PackedScene" uid="uid://ddofrga67pgaf" path="res://Dungeon Generation/Dungeon_generator.tscn" id="2_ogoej"]
-[ext_resource type="PackedScene" uid="uid://dr2yiqfj3x2xs" path="res://art/ModelPrefabs/WallEyePrefab.tscn" id="3_gf5is"]
+[ext_resource type="PackedScene" path="res://Scenes/teleporter.tscn" id="1_fmvxk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsg4m"]
 albedo_color = Color(0.7949679, 0.06364303, 0.762995, 1)
@@ -11,8 +9,6 @@ albedo_color = Color(0.7949679, 0.06364303, 0.762995, 1)
 material = SubResource("StandardMaterial3D_dsg4m")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r737g"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_rc72b"]
 
 [node name="EndScene" type="Node3D"]
 
@@ -24,16 +20,8 @@ mesh = SubResource("BoxMesh_fmvxk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_r737g")
 
-[node name="Teleporter" type="Node3D" parent="."]
-transform = Transform3D(0.57, 0, 0, 0, 0.57, 0, 0, 0, 0.57, 0, 1.371318, 0)
+[node name="Teleporter" parent="." instance=ExtResource("1_fmvxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.268868, 0)
 
-[node name="Area3D" type="Area3D" parent="Teleporter"]
-script = ExtResource("1_hr525")
-target_scene = ExtResource("2_ogoej")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Teleporter/Area3D"]
-transform = Transform3D(1.46, 0, 0, 0, 3.142, 0, 0, 0, 1.46, 0, 0, 0)
-shape = SubResource("BoxShape3D_rc72b")
-
-[node name="WallEyePrefab" parent="Teleporter" instance=ExtResource("3_gf5is")]
-transform = Transform3D(1.9106855e-15, -4.371139e-08, -1, -1, -4.371139e-08, 0, -4.371139e-08, 1, -4.371139e-08, 0, 0, 0)
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4699497, 0.51274776)

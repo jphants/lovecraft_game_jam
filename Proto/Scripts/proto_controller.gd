@@ -4,6 +4,7 @@ extends CharacterBody3D
 # CONFIGURACIÓN GENERAL
 # =====================================================
 @export var has_gravity := true
+@export var cheatLight : bool = false
 
 @export_group("Dungeon Movement")
 @export var step_distance := 2.0
@@ -385,20 +386,28 @@ func update_battery_blink(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	sanity_timer += delta
-	if sanity_timer >= sanity_delay:
-		sanity_timer = 0.0
+	if sanity_timer < sanity_delay:
+		return
 
-		if not flashlight_on:
-			sanity -= 1
-		else:
-			sanity += 1
-			battery -= 1
+	sanity_timer = 0.0
 
-		sanity = clamp(sanity, 0, 100)
-		battery = clamp(battery, 0, 100)
-
+	if cheatLight:
 		update_battery_bars()
 		update_health_bars()
+		return
+
+	if flashlight_on:
+		sanity += 1
+		battery -= 1
+	else:
+		sanity -= 1
+
+	sanity = clamp(sanity, 0, 100)
+	battery = clamp(battery, 0, 100)
+
+	update_battery_bars()
+	update_health_bars()
+
 
 
 func _on_quit_game_pressed() -> void:
