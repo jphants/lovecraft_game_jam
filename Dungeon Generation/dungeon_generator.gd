@@ -183,7 +183,10 @@ func build_start_end() -> void:
 	spawn(pick_weighted(ends), end_pos)
 
 	if player:
-		player.global_position = start_pos + Vector3(0, cell_size * 0.5, 0)
+		player.set_start_position(
+			start_pos + Vector3(0, cell_size * 0.5, 0)
+		)
+
 
 func build_border() -> void:
 	var scene := pick_weighted(borders)

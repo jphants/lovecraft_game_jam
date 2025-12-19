@@ -1,10 +1,18 @@
 extends CharacterBody3D
 
 # =====================================================
+# SEÑALES (COMUNICACIÓN CON UI)
+# =====================================================
+signal battery_changed(value)
+signal sanity_changed(value)
+signal pause_toggled(value)
+signal interact_visible(value)
+
+# =====================================================
 # CONFIGURACIÓN GENERAL
 # =====================================================
 @export var has_gravity := true
-@export var cheatLight : bool = false
+@export var cheatLight := false
 
 @export_group("Dungeon Movement")
 @export var step_distance := 2.0
@@ -12,12 +20,12 @@ extends CharacterBody3D
 @export var rotate_duration := 0.1
 
 @export_group("Input Actions")
-@export var input_left : String = "ui_left"
-@export var input_right : String = "ui_right"
-@export var input_forward : String = "ui_up"
-@export var input_back : String = "ui_down"
-@export var input_flashlight : String = "flashlight"
-@export var input_pause : String = "ui_pause"
+@export var input_left := "ui_left"
+@export var input_right := "ui_right"
+@export var input_forward := "ui_up"
+@export var input_back := "ui_down"
+@export var input_flashlight := "flashlight"
+@export var input_pause := "ui_pause"
 
 @export_group("Flashlight Mouse")
 @export var mouse_sensitivity := 0.002
@@ -28,36 +36,45 @@ extends CharacterBody3D
 @export var wobble_speed := 6.0
 
 @export_group("Footsteps")
-
 @export var forward_repeat_delay := 0.18
-var fixed_height : float
+
 # =====================================================
 # NODOS
 # =====================================================
 @onready var head: Node3D = $Head
-@onready var flashlight: SpotLight3D = $Head/Camera3D/Flashlight/SpotLight3D
+@onready var camera_3d: Camera3D = $Head/Camera3D
 @onready var flashlight_root: Node3D = $Head/Camera3D/Flashlight
-@onready var SeeCast: RayCast3D = $Head/Camera3D/Flashlight/RayCast3D
+@onready var flashlight: SpotLight3D = $Head/Camera3D/Flashlight/SpotLight3D
+@onready var see_cast: RayCast3D = $Head/Camera3D/Flashlight/RayCast3D
+
 @onready var step_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var heartbeat_player: AudioStreamPlayer3D = $Heartbeat
 
-@onready var battery_label: Label = $CanvasLayer/Battery
-@onready var sanity_label: Label = $CanvasLayer/Sanity
+# =====================================================
+# ESTADO PLAYER
+# =====================================================
+var battery: int = Global.battery
+var sanity: int = Global.sanity
 
-@export var battery = Global.battery
-@export var sanity = Global.sanity
+var is_moving := false
+var target_rotation_y := 0.0
+var forward_timer := 0.0
 
-@onready var battery_bar: HBoxContainer = $CanvasLayer/BatteryBar
-@onready var health_bar: HBoxContainer = $CanvasLayer/HealthBar
+# Grid
+var grid_position := Vector2i.ZERO
+var fixed_height: float
 
-const BATTERY_BAR = preload("uid://ddr11jpuud2e2")
-const HEALTH_BAR = preload("uid://bxyalmprwy2cc")
+# Flashlight
+var flashlight_on := true
+var flashlight_base_position: Vector3
+var flashlight_base_rotation: Vector3
+var wobble_time := 0.0
+var mouse_rotation := Vector2.ZERO
 
-@onready var panelPause: Panel = $CanvasLayer/Control/Panel
+# Pause
+var paused := false
 
-@onready var camera_3d: Camera3D = $Head/Camera3D
-
-# Camera shake por sanity
+# Camera shake
 var camera_base_pos: Vector3
 var shake_time := 0.0
 
@@ -65,92 +82,41 @@ var shake_time := 0.0
 @export var max_shake_strength := 0.01
 @export var shake_speed := 4.0
 
-func update_camera_shake(delta: float) -> void:
-	# Normaliza sanity (1 = sano, 0 = loco)
-	var sanity_ratio: float = clamp(float(sanity) / 100.0, 0.0, 1.0)
-
-	# Intensidad inversa
-	var shake_strength: float = lerp(max_shake_strength, 0.0, sanity_ratio)
-
-	# Vuelve a la posición base si no hay shake
-	if shake_strength < 0.001:
-		camera_3d.position = camera_3d.position.lerp(camera_base_pos, delta * 8.0)
-		return
-
-	shake_time += delta * shake_speed
-
-	var offset: Vector3 = Vector3(
-		sin(shake_time * 1.3),
-		sin(shake_time * 2.1),
-		sin(shake_time * 0.9)
-	) * shake_strength
-
-	camera_3d.position = camera_base_pos + offset
-
-# =====================================================
-# ESTADO
-# =====================================================
-var is_moving := false
-var target_rotation_y := 0.0
-var forward_timer := 0.0
-
-# GRID (🔒 CRÍTICO)
-var grid_position := Vector2i.ZERO
-
-# Linterna
-var flashlight_on := true
-var flashlight_base_position: Vector3
-var flashlight_base_rotation: Vector3
-var wobble_time := 0.0
-var mouse_rotation := Vector2.ZERO
-
-func setup_battery_bars() -> void:
-	for i in range(MAX_BARS):
-		var bar := TextureRect.new()
-		bar.texture = BATTERY_BAR
-		bar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		bar.stretch_mode = TextureRect.STRETCH_KEEP
-		battery_bar.add_child(bar)
-		battery_bars.append(bar)
-
-func setup_health_bars() -> void:
-	for i in range(MAX_BARS):
-		var bar := TextureRect.new()
-		bar.texture = HEALTH_BAR
-		bar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		bar.stretch_mode = TextureRect.STRETCH_KEEP
-		health_bar.add_child(bar)
-		health_bars.append(bar)
+# Sanity tick
+var sanity_delay := 1.0
+var sanity_timer := 0.0
 
 # =====================================================
 # READY
 # =====================================================
-
 func _ready() -> void:
-	heartbeat_player.stream.loop = true
-	heartbeat_player.play()
+	randomize()
+
 	fixed_height = global_position.y
 	camera_base_pos = camera_3d.position
-	
-	setup_battery_bars()
-	setup_health_bars()
-	update_battery_bars()
-	
-	randomize()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)	
 
-	SeeCast.enabled = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	heartbeat_player.stream.loop = true
+	heartbeat_player.play()
+
+	see_cast.enabled = true
 	flashlight_base_position = flashlight_root.position
 	flashlight_base_rotation = flashlight_root.rotation
 
-	# 🔒 SNAP INICIAL AL GRID
+	_emit_stats()
+
+func set_start_position(world_pos: Vector3) -> void:
+	fixed_height = world_pos.y
+
 	grid_position = Vector2i(
-		round(global_position.x / step_distance),
-		round(global_position.z / step_distance)
+		round(world_pos.x / step_distance),
+		round(world_pos.z / step_distance)
 	)
+
 	global_position = grid_to_world(grid_position)
 
-var show_menu : bool = false
+
 # =====================================================
 # INPUT
 # =====================================================
@@ -163,6 +129,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			deg_to_rad(-max_vertical_angle),
 			deg_to_rad(max_vertical_angle)
 		)
+
 	if is_moving:
 		return
 
@@ -174,38 +141,34 @@ func _unhandled_input(event: InputEvent) -> void:
 		move_backward()
 	elif event.is_action_pressed(input_flashlight) and battery > 0:
 		switch_flashlight()
-		
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(input_pause):
-		show_menu = !show_menu
+		paused = !paused
+		emit_signal("pause_toggled", paused)
 
-		if show_menu:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			panelPause.show()
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			panelPause.hide()
-
+		Input.set_mouse_mode(
+			Input.MOUSE_MODE_VISIBLE if paused
+			else Input.MOUSE_MODE_CAPTURED
+		)
 
 # =====================================================
-# PHYSICS
+# PROCESS
 # =====================================================
 func _physics_process(delta: float) -> void:
-
 	# Interacción
-	if SeeCast.is_colliding():
-		var target = SeeCast.get_collider()
-		$CanvasLayer/BoxContainer/Label.visible = target and target.has_method("interact")
+	if see_cast.is_colliding():
+		var target := see_cast.get_collider()
+		emit_signal("interact_visible", target and target.has_method("interact"))
 	else:
-		$CanvasLayer/BoxContainer/Label.hide()
+		emit_signal("interact_visible", false)
 
 	# Gravedad
 	if has_gravity and not is_on_floor():
 		velocity += get_gravity() * delta
 		move_and_slide()
 
-	# Forward continuo por tiles
+	# Movimiento forward continuo
 	if not is_moving and Input.is_action_pressed(input_forward):
 		forward_timer -= delta
 		if forward_timer <= 0.0:
@@ -218,24 +181,41 @@ func _physics_process(delta: float) -> void:
 	update_flashlight_aim()
 	update_camera_shake(delta)
 
-	# 🔒 SNAP DEFENSIVO
 	if not is_moving:
 		global_position = grid_to_world(grid_position)
-		
+
 	if battery <= 0 and flashlight_on:
 		flashlight_on = false
 		flashlight.visible = false
 
+func _process(delta: float) -> void:
+	sanity_timer += delta
+	if sanity_timer < sanity_delay:
+		return
+
+	sanity_timer = 0.0
+
+	if cheatLight:
+		_emit_stats()
+		return
+
+	if flashlight_on:
+		sanity += 1
+		battery -= 1
+	else:
+		sanity -= 1
+
+	battery = clamp(battery, 0, 100)
+	sanity = clamp(sanity, 0, 100)
+
+	_emit_stats()
+	_update_heartbeat()
 
 # =====================================================
 # GRID HELPERS
 # =====================================================
 func grid_to_world(g: Vector2i) -> Vector3:
-	return Vector3(
-		g.x * step_distance,
-		fixed_height,  # 🔒 altura fija
-		g.y * step_distance
-	)
+	return Vector3(g.x * step_distance, fixed_height, g.y * step_distance)
 
 func get_forward_dir() -> Vector2i:
 	return Vector2i(
@@ -256,16 +236,11 @@ func move_forward() -> void:
 
 	grid_position = next_grid
 	is_moving = true
-
 	play_variation()
 
 	var tween := create_tween()
-	tween.tween_property(
-		self,
-		"global_position",
-		target_world,
-		move_duration
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", target_world, move_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	tween.finished.connect(func():
 		global_position = grid_to_world(grid_position)
@@ -284,12 +259,8 @@ func move_backward() -> void:
 	is_moving = true
 
 	var tween := create_tween()
-	tween.tween_property(
-		self,
-		"global_position",
-		target_world,
-		move_duration
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "global_position", target_world, move_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	tween.finished.connect(func():
 		global_position = grid_to_world(grid_position)
@@ -301,24 +272,10 @@ func rotate_step(degrees: float) -> void:
 	target_rotation_y = rotation.y + deg_to_rad(degrees)
 
 	var tween := create_tween()
-	tween.tween_property(
-		self,
-		"rotation:y",
-		target_rotation_y,
-		rotate_duration
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, "rotation:y", target_rotation_y, rotate_duration)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	tween.finished.connect(func(): is_moving = false)
-
-# =====================================================
-# AUDIO
-# =====================================================
-func play_variation():
-	step_player.stop()
-	step_player.pitch_scale = lerp(0.6, 1.1, randf())
-	step_player.volume_db = lerp(-8.0, -4.0, randf())
-	step_player.play()
-	
 
 # =====================================================
 # FLASHLIGHT
@@ -328,7 +285,6 @@ func switch_flashlight() -> void:
 	flashlight.visible = flashlight_on
 
 func update_flashlight_aim() -> void:
-
 	flashlight_root.rotation = flashlight_base_rotation + Vector3(
 		mouse_rotation.x,
 		mouse_rotation.y,
@@ -338,85 +294,52 @@ func update_flashlight_aim() -> void:
 func update_flashlight_wobble(delta: float) -> void:
 	if is_moving:
 		wobble_time += delta * wobble_speed
-		var x: float = sin(wobble_time) * wobble_strength
-		var y: float = abs(cos(wobble_time * 2.0)) * wobble_strength * 0.5
-
+		var x : float = sin(wobble_time) * wobble_strength
+		var y : float = abs(cos(wobble_time * 2.0)) * wobble_strength * 0.5
 		flashlight_root.position = flashlight_base_position + Vector3(x, -y, 0)
 	else:
 		flashlight_root.position = flashlight_root.position.lerp(
 			flashlight_base_position,
 			delta * 10.0
 		)
-var sanity_delay := 1.0
-var sanity_timer := 0.0
 
-var low_battery := false
-var blink_time := 0.0
-const BLINK_SPEED := 0.3
-var battery_bars: Array[Control] = []
-var health_bars: Array[Control] = []
-const MAX_BARS := 5
-
-func update_battery_bars() -> void:
-	var bars_on := int(ceil(battery / 20.0))
-	bars_on = clamp(bars_on, 0, MAX_BARS)
-
-	for i in range(MAX_BARS):
-		battery_bars[i].visible = i < bars_on
-
-func update_health_bars() -> void:
-	var bars_on := int(ceil(sanity / 20.0))
-	bars_on = clamp(bars_on, 0, MAX_BARS)
-
-	for i in range(MAX_BARS):
-		health_bars[i].visible = i < bars_on
-
-func update_battery_blink(delta: float) -> void:
-	low_battery = battery <= 20 and battery > 0
-
-	if not low_battery:
-		# Asegura que la última barrita esté visible
-		if battery_bars.size() > 0:
-			battery_bars[0].visible = battery > 0
-		return
-
-	blink_time += delta
-	if blink_time >= BLINK_SPEED:
-		blink_time = 0.0
-		# Parpadea la ÚLTIMA barrita
-		battery_bars[0].visible = !battery_bars[0].visible
+# =====================================================
+# AUDIO
+# =====================================================
+func play_variation():
+	step_player.stop()
+	step_player.pitch_scale = lerp(0.6, 1.1, randf())
+	step_player.volume_db = lerp(-8.0, -4.0, randf())
+	step_player.play()
 
 func _update_heartbeat() -> void:
-	var t : float = 1.0 - (sanity / 100.0)  # 0 = sano, 1 = crítico
-
+	var t := 1.0 - (sanity / 100.0)
 	heartbeat_player.pitch_scale = lerp(0.85, 1.6, t)
 	heartbeat_player.volume_db = lerp(-20.0, -5.0, t)
 
-func _process(delta: float) -> void:
-	sanity_timer += delta
-	if sanity_timer < sanity_delay:
+# =====================================================
+# CAMERA SHAKE
+# =====================================================
+func update_camera_shake(delta: float) -> void:
+	var sanity_ratio : float = clamp(float(sanity) / 100.0, 0.0, 1.0)
+	var shake_strength : float = lerp(max_shake_strength, 0.0, sanity_ratio)
+
+	if shake_strength < 0.001:
+		camera_3d.position = camera_3d.position.lerp(camera_base_pos, delta * 8.0)
 		return
 
-	sanity_timer = 0.0
+	shake_time += delta * shake_speed
+	var offset := Vector3(
+		sin(shake_time * 1.3),
+		sin(shake_time * 2.1),
+		sin(shake_time * 0.9)
+	) * shake_strength
 
-	if cheatLight:
-		update_battery_bars()
-		update_health_bars()
-		return
+	camera_3d.position = camera_base_pos + offset
 
-	if flashlight_on:
-		sanity += 1
-		battery -= 1
-	else:
-		sanity -= 1
-
-	sanity = clamp(sanity, 0, 100)
-	battery = clamp(battery, 0, 100)
-
-	update_battery_bars()
-	update_health_bars()
-
-	_update_heartbeat()
-
-func _on_quit_game_pressed() -> void:
-	get_tree().quit()
+# =====================================================
+# HELPERS
+# =====================================================
+func _emit_stats():
+	emit_signal("battery_changed", battery)
+	emit_signal("sanity_changed", sanity)

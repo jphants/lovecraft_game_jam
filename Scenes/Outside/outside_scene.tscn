@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://dhhgoa5qvwsv"]
+[gd_scene load_steps=20 format=3 uid="uid://dhhgoa5qvwsv"]
 
 [ext_resource type="Script" uid="uid://clq4rrdt0hj7g" path="res://Scenes/Outside/outside_scene.gd" id="1_noh1l"]
 [ext_resource type="PackedScene" uid="uid://l0dv1b1kjv4v" path="res://art/models/Vent/Vent.glb" id="2_021ek"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://Proto/Scenes/proto_controller.tscn" id="2_rc72b"]
 [ext_resource type="PackedScene" uid="uid://c183dwkmr6sxx" path="res://Scenes/teleporter.tscn" id="3_2jp4h"]
-[ext_resource type="Script" uid="uid://dndlw1yho4l0d" path="res://Scenes/Outside/interactive_object.gd" id="5_evuug"]
+[ext_resource type="PackedScene" uid="uid://skb4loy48l2m" path="res://Scenes/PlayerUI.tscn" id="3_uevug"]
 [ext_resource type="PackedScene" uid="uid://0xv2stsxta43" path="res://art/models/Warehouse/WarehouseOutside.glb" id="6_ganml"]
 [ext_resource type="PackedScene" uid="uid://dh73av31t6q37" path="res://Prefabs/Environment/FencesPrefab.tscn" id="7_hk1ni"]
 [ext_resource type="PackedScene" uid="uid://d24wcer751x0u" path="res://Prefabs/Environment/GarbageDumpClosedPrefab.tscn" id="9_lw8ss"]
@@ -16,6 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://c8hmxea7078ds" path="res://art/models/WallPipe/WallPipe.glb" id="15_2jp4h"]
 [ext_resource type="PackedScene" uid="uid://dvgivpvjdvl75" path="res://Prefabs/Environment/TreePrefab.tscn" id="16_uevug"]
 
+[sub_resource type="Environment" id="Environment_ganml"]
+background_mode = 1
+background_color = Color(0.45452422, 0.45452428, 0.45452422, 1)
+background_energy_multiplier = 0.9
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rc72b"]
 albedo_color = Color(0.12248912, 0.352611, 0.120152496, 1)
 
@@ -24,58 +29,17 @@ material = SubResource("StandardMaterial3D_rc72b")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6set6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rc72b"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evuug"]
-albedo_color = Color(0.11573803, 0.624776, 0.72859025, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ganml"]
-material = SubResource("StandardMaterial3D_evuug")
-
-[sub_resource type="Environment" id="Environment_ganml"]
-background_mode = 1
-background_color = Color(0.45452422, 0.45452428, 0.45452422, 1)
-background_energy_multiplier = 0.9
-
 [node name="OutsideScene" type="Node3D"]
 script = ExtResource("1_noh1l")
 
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.566479, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(29.745958, 0, 0, 0, 1, 0, 0, 0, 42.299347, 0, 0, -17.30413)
-mesh = SubResource("BoxMesh_hgy54")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_6set6")
-
-[node name="ProtoController" parent="." instance=ExtResource("2_rc72b")]
+[node name="Player" parent="." instance=ExtResource("2_rc72b")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.04159373, 0)
 has_gravity = false
 
+[node name="PlayerUI" parent="." instance=ExtResource("3_uevug")]
+
 [node name="Teleporter" parent="." instance=ExtResource("3_2jp4h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9513826, 1.2093908, -19.199196)
-
-[node name="InteractiveObjectSample" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43275, 0.36182904, 2.5976644)
-
-[node name="Label3D" type="Label3D" parent="InteractiveObjectSample"]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0.87570643, 0)
-text = "Interactive object example"
-
-[node name="Area3D" type="Area3D" parent="InteractiveObjectSample"]
-script = ExtResource("5_evuug")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractiveObjectSample/Area3D"]
-shape = SubResource("BoxShape3D_rc72b")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="InteractiveObjectSample"]
-layers = 3
-mesh = SubResource("BoxMesh_ganml")
-
-[node name="WarehouseOutside" parent="." instance=ExtResource("6_ganml")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.20990491, 9.536743e-07, -24.445557)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ganml")
@@ -339,3 +303,16 @@ transform = Transform3D(0.8399136, 0, 0.54272014, 0, 0.94367576, 0, -0.54272014,
 
 [node name="Tree7" parent="Env" instance=ExtResource("16_uevug")]
 transform = Transform3D(0.8399136, 0, 0.54272014, 0, 0.94367576, 0, -0.54272014, 0, 0.8399136, 7.7362585, -0.120850086, -35.060017)
+
+[node name="WarehouseOutside" parent="Env" instance=ExtResource("6_ganml")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.20990491, 9.536743e-07, -24.445557)
+
+[node name="Floor" type="StaticBody3D" parent="Env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.566479, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Env/Floor"]
+transform = Transform3D(29.745958, 0, 0, 0, 1, 0, 0, 0, 42.299347, 0, 0, -17.30413)
+mesh = SubResource("BoxMesh_hgy54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Floor"]
+shape = SubResource("BoxShape3D_6set6")
