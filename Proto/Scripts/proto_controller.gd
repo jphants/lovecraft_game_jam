@@ -39,6 +39,7 @@ var fixed_height : float
 @onready var flashlight_root: Node3D = $Head/Camera3D/Flashlight
 @onready var SeeCast: RayCast3D = $Head/Camera3D/Flashlight/RayCast3D
 @onready var step_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var heartbeat_player: AudioStreamPlayer3D = $Heartbeat
 
 @onready var battery_label: Label = $CanvasLayer/Battery
 @onready var sanity_label: Label = $CanvasLayer/Sanity
@@ -126,6 +127,8 @@ func setup_health_bars() -> void:
 # =====================================================
 
 func _ready() -> void:
+	heartbeat_player.stream.loop = true
+	heartbeat_player.play()
 	fixed_height = global_position.y
 	camera_base_pos = camera_3d.position
 	
@@ -383,6 +386,11 @@ func update_battery_blink(delta: float) -> void:
 		# Parpadea la ÚLTIMA barrita
 		battery_bars[0].visible = !battery_bars[0].visible
 
+func _update_heartbeat() -> void:
+	var t : float = 1.0 - (sanity / 100.0)  # 0 = sano, 1 = crítico
+
+	heartbeat_player.pitch_scale = lerp(0.85, 1.6, t)
+	heartbeat_player.volume_db = lerp(-20.0, -5.0, t)
 
 func _process(delta: float) -> void:
 	sanity_timer += delta
@@ -408,7 +416,7 @@ func _process(delta: float) -> void:
 	update_battery_bars()
 	update_health_bars()
 
-
+	_update_heartbeat()
 
 func _on_quit_game_pressed() -> void:
 	get_tree().quit()
