@@ -38,7 +38,6 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_6jfs1")
 theme_override_font_sizes/font_size = 25
-text = "Enemy"
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2

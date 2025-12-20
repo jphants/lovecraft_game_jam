@@ -1,17 +1,11 @@
-<<<<<<< HEAD
-[gd_scene load_steps=3 format=3 uid="uid://lotb6x7n203v"]
-
-[ext_resource type="Script" uid="uid://dgtmshwgxv3lp" path="res://Combat/enemy.gd" id="1_iyc56"]
-[ext_resource type="Texture2D" uid="uid://ctwv3ucwuhxvj" path="res://art/Mounstros/Mounstro2.png" id="2_iqr87"]
-=======
 [gd_scene load_steps=3 format=3 uid="uid://pol4li2kk8f3"]
 
 [ext_resource type="Script" uid="uid://dgtmshwgxv3lp" path="res://Combat/enemy.gd" id="1_iyc56"]
 [ext_resource type="Texture2D" uid="uid://ct5514rx7g0oc" path="res://art/Monsters/Mounstro2.png" id="2_iqr87"]
->>>>>>> combat
 
 [node name="Enemy3" type="Node3D"]
 script = ExtResource("1_iyc56")
+max_health = 20
 metadata/_custom_type_script = "uid://dgtmshwgxv3lp"
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

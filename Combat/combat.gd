@@ -46,10 +46,12 @@ func update_ui(target : int):
 		last_target = target
 	for i in range(4):
 		if enemies[i]:
-			enemy_ui[(target + i) % 4].visible = true
-			enemy_ui[(target + i) % 4].update(enemies[i])
+			#enemy_ui[(-target + i + 4) % 4].visible = true
+			enemy_ui[(-target + i + 4) % 4].modulate.a = 1.0
+			enemy_ui[(-target + i + 4) % 4].update(enemies[i])
 		else:
-			enemy_ui[(target + i) % 4].visible = false
+			#enemy_ui[(-target + i + 4) % 4].visible = false
+			enemy_ui[(-target + i + 4) % 4].modulate.a = 0.0
 
 func display(lines : Array[String]):
 	var txt := ""
@@ -59,7 +61,6 @@ func display(lines : Array[String]):
 	var resource = DialogueManager.create_resource_from_text(txt)
 	DialogueManager.show_dialogue_balloon(resource)
 	await DialogueManager.dialogue_ended
-	
 
 func battle_loop():
 	await display(["Battle Start"])
