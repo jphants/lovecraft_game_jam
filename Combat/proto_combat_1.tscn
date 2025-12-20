@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcyhcwi2iva5l"]
+[gd_scene load_steps=13 format=3 uid="uid://dcyhcwi2iva5l"]
 
 [ext_resource type="Script" uid="uid://rdbjqhj6cg33" path="res://Combat/combat.gd" id="1_c462a"]
 [ext_resource type="PackedScene" uid="uid://b8iwkppayu436" path="res://Combat/myenemy1.tscn" id="2_1lt5g"]
 [ext_resource type="PackedScene" uid="uid://dt8s3f16nmjdx" path="res://Combat/enemy.tscn" id="2_x0xbq"]
+[ext_resource type="PackedScene" uid="uid://lotb6x7n203v" path="res://Combat/Enemy3.tscn" id="3_liowj"]
 [ext_resource type="Script" uid="uid://b2ltfk8mf82h4" path="res://Combat/attack.gd" id="4_x0xbq"]
 [ext_resource type="Script" uid="uid://dtq6tqnh02bog" path="res://Combat/simple_attack.gd" id="5_cebw4"]
 [ext_resource type="PackedScene" uid="uid://dieafpfn3s2jv" path="res://Combat/player.tscn" id="5_x0xbq"]
@@ -31,7 +32,7 @@ metadata/_custom_type_script = "uid://dtq6tqnh02bog"
 
 [node name="ProtoCombat1" type="Node3D"]
 script = ExtResource("1_c462a")
-enemy_scenes = Array[PackedScene]([ExtResource("2_1lt5g"), null, ExtResource("2_x0xbq"), null])
+enemy_scenes = Array[PackedScene]([ExtResource("2_1lt5g"), ExtResource("3_liowj"), ExtResource("2_x0xbq"), null])
 dist = 5.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
