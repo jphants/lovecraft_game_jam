@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dgtmshwgxv3lp" path="res://Combat/enemy.gd" id="1_1cinr"]
 [ext_resource type="Script" uid="uid://b2ltfk8mf82h4" path="res://Combat/attack.gd" id="2_x08jt"]
 [ext_resource type="Script" uid="uid://dtq6tqnh02bog" path="res://Combat/simple_attack.gd" id="3_iwspn"]
+[ext_resource type="Texture2D" uid="uid://4lx4erp03iwk" path="res://art/Monsters/Mounstro1.png" id="4_dmefl"]
 
 [sub_resource type="Resource" id="Resource_v4t76"]
 script = ExtResource("3_iwspn")
@@ -14,13 +15,13 @@ script = ExtResource("3_iwspn")
 base_damage = 10
 metadata/_custom_type_script = "uid://dtq6tqnh02bog"
 
-[sub_resource type="SphereMesh" id="SphereMesh_1cinr"]
-
 [node name="Myenemy1" type="Node3D"]
 script = ExtResource("1_1cinr")
 max_health = 50
 attacks = Array[ExtResource("2_x08jt")]([SubResource("Resource_v4t76"), SubResource("Resource_x08jt")])
 metadata/_custom_type_script = "uid://dgtmshwgxv3lp"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_1cinr")
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("4_dmefl")
+hframes = 3
+vframes = 2
