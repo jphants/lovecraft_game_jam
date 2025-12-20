@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://dtq6tqnh02bog"
 
 [node name="Myenemy1" type="Node3D"]
 script = ExtResource("1_1cinr")
-max_health = 50
+max_health = 25
 attacks = Array[ExtResource("2_x08jt")]([SubResource("Resource_v4t76"), SubResource("Resource_x08jt")])
 metadata/_custom_type_script = "uid://dgtmshwgxv3lp"
 

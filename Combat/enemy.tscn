@@ -25,7 +25,7 @@ albedo_texture = ExtResource("4_cjvjl")
 [node name="Enemy" type="Node3D"]
 script = ExtResource("1_7k104")
 frequency = Array[int]([1, 2])
-max_health = 100
+max_health = 50
 attacks = Array[ExtResource("2_d8opp")]([SubResource("Resource_cjvjl"), SubResource("Resource_iu004")])
 
 [node name="model" type="Node3D" parent="."]

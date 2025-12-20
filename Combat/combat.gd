@@ -68,9 +68,11 @@ func display(lines : Array[String]):
 
 func battle_loop():
 	await display(["Battle Start"])
+	var won := true
 	
 	while true:
 		var e : Entity = player if queue[curr] == -1 else enemies[queue[curr]]
+		
 		var all = [[player] as Array[Entity], enemies]
 		
 		var a := await e.get_attack()
@@ -85,6 +87,15 @@ func battle_loop():
 		else:
 			await display([str(e.name) + " did nothing..."])
 		
+		for i in range(4):
+			if not enemies[i]:
+				continue
+			if enemies[i].health == 0:
+				await display([str(enemies[i].name) + " was defeated."])
+				enemies[i].queue_free()
+				enemies[i] = null
+				while i in queue:
+					queue.erase(i)
 		update_ui(-1)
 		
 		curr = (curr + 1) % queue.size()
@@ -95,3 +106,10 @@ func battle_loop():
 		
 		if cond:
 			break
+		
+		if player.health == 0:
+			won = false
+			break
+	
+	# use won variable (bool) plz
+	get_tree().change_scene_to_file('res://Proto/Scenes/main.tscn')
