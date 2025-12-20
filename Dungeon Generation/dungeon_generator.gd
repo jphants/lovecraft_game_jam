@@ -6,7 +6,7 @@ extends Node3D
 # =========================
 @export_group("Player")
 @export var player: CharacterBody3D
-
+@export var exit_area: Area3D
 @export var generate_map := false : set = _set_generate
 @export var clear_map := false : set = _set_clear
 
@@ -74,6 +74,14 @@ func _set_clear(value: bool) -> void:
 # =========================
 # GENERATION
 # =========================
+func regenerate():
+	clear()
+	init_grid()
+	generate_rooms()
+	build_all()
+	build_border()
+
+
 func generate() -> void:
 	clear()
 	init_grid()
@@ -188,6 +196,9 @@ func build_start_end() -> void:
 		player.set_start_position(
 			start_pos + Vector3(0, cell_size * 0.5, 0)
 		)
+	
+	if exit_area:
+		exit_area.global_position = end_pos
 
 
 func build_border() -> void:

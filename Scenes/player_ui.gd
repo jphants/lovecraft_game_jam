@@ -74,7 +74,7 @@ func show_pause(value: bool) -> void:
 	pause_panel.visible = value
 
 func show_interact(value: bool) -> void:
-	interact_label.visible = value
+	interact_label.visible = false
 
 # =====================================================
 # EFECTOS VISUALES (SOLO UI)

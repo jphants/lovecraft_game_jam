@@ -1,6 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://vekoyyt82mvb"]
-
-[ext_resource type="PackedScene" uid="uid://c183dwkmr6sxx" path="res://Scenes/teleporter.tscn" id="1_fmvxk"]
+[gd_scene load_steps=4 format=3 uid="uid://vekoyyt82mvb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsg4m"]
 albedo_color = Color(0.7949679, 0.06364303, 0.762995, 1)
@@ -19,9 +17,6 @@ mesh = SubResource("BoxMesh_fmvxk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_r737g")
-
-[node name="Teleporter" parent="." instance=ExtResource("1_fmvxk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.268868, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4699497, 0.51274776)

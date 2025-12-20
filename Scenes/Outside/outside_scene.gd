@@ -6,6 +6,7 @@ extends Node3D
 const OPENING_DIALOGUE = preload("uid://vdqqnaf8hxo2")
 
 func _ready() -> void:
+	await get_tree().create_timer(5.0).timeout
 	# ===============================
 	# PLAYER → UI
 	# ===============================
@@ -23,3 +24,4 @@ func _ready() -> void:
 	ui.show_pause(false)
 	ui.show_interact(false)
 	DialogueManager.show_dialogue_balloon(OPENING_DIALOGUE)
+	
