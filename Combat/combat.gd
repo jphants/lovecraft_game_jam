@@ -10,6 +10,8 @@ extends Node3D
 	$CanvasLayer/GridContainer/HBoxContainer/EnemyUi3
 ]
 
+@onready var player_ui = $CanvasLayer/MarginContainer/PlayerUi
+
 var enemies : Array[Entity]
 
 var queue : Array[int]
@@ -52,6 +54,8 @@ func update_ui(target : int):
 		else:
 			#enemy_ui[(-target + i + 4) % 4].visible = false
 			enemy_ui[(-target + i + 4) % 4].modulate.a = 0.0
+	
+	player_ui.update(player)
 
 func display(lines : Array[String]):
 	var txt := ""

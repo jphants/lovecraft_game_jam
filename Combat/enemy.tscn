@@ -16,7 +16,7 @@ base_damage = 5
 metadata/_custom_type_script = "uid://dtq6tqnh02bog"
 
 [sub_resource type="PrismMesh" id="PrismMesh_iu004"]
-size = Vector3(5, 5, 5)
+size = Vector3(2, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi2p4"]
 albedo_color = Color(1, 0.0627451, 0.22352941, 1)
