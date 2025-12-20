@@ -3,10 +3,19 @@ extends Node3D
 @export var enemy_scenes : Array[PackedScene]
 @export var dist : float
 
+@onready var enemy_ui = [
+	$CanvasLayer/GridContainer/EnemyUi,
+	$CanvasLayer/GridContainer/HBoxContainer/EnemyUi2,
+	$CanvasLayer/GridContainer/EnemyUi4,
+	$CanvasLayer/GridContainer/HBoxContainer/EnemyUi3
+]
+
 var enemies : Array[Entity]
 
 var queue : Array[int]
 var curr := 0
+
+var last_target := 0
 
 @onready var player := $Player
 
@@ -22,10 +31,25 @@ func _ready() -> void:
 			queue.append(i)
 		else:
 			enemies.append(null)
+	
+	update_ui(0)
+	
 	queue.insert(randi_range(0, queue.size()), -1)
 	print(queue)
 	
 	battle_loop()
+
+func update_ui(target : int):
+	if target == -1:
+		target = last_target
+	else:
+		last_target = target
+	for i in range(4):
+		if enemies[i]:
+			enemy_ui[(target + i) % 4].visible = true
+			enemy_ui[(target + i) % 4].update(enemies[i])
+		else:
+			enemy_ui[(target + i) % 4].visible = false
 
 func display(lines : Array[String]):
 	var txt := ""
@@ -55,6 +79,8 @@ func battle_loop():
 				await display(["No target..."])
 		else:
 			await display([str(e.name) + " did nothing..."])
+		
+		update_ui(-1)
 		
 		curr = (curr + 1) % queue.size()
 		

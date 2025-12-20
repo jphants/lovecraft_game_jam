@@ -22,6 +22,7 @@ var mouse_rotation := Vector2.ZERO
 var target := 0 
 
 signal chosen
+signal target_changed(t : int)
 
 func _ready() -> void:
 	set_process_unhandled_input(false)
@@ -34,9 +35,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed(input_left):
 		rotate_step(90)
 		target = (target+1) % 4
+		emit_signal("target_changed", target)
 	elif event.is_action_pressed(input_right):
 		rotate_step(-90)
 		target = (target-1 + 4) % 4
+		emit_signal("target_changed", target)
 	elif event.is_action_pressed("click"):
 		emit_signal("chosen")
 
