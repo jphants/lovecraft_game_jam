@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://pol4li2kk8f3"]
+
+[ext_resource type="Script" uid="uid://dgtmshwgxv3lp" path="res://Combat/enemy.gd" id="1_iyc56"]
+[ext_resource type="Texture2D" uid="uid://ct5514rx7g0oc" path="res://art/Monsters/Mounstro2.png" id="2_iqr87"]
+
+[node name="Enemy3" type="Node3D"]
+script = ExtResource("1_iyc56")
+metadata/_custom_type_script = "uid://dgtmshwgxv3lp"
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7583077, -0.8210921, -1.4466336)
+modulate = Color(0.3254902, 0.27058825, 1, 1)
+billboard = 1
+texture = ExtResource("2_iqr87")
+hframes = 3
+vframes = 2
