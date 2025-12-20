@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7dbh48q2prb8"]
+
+[ext_resource type="FontFile" uid="uid://brtp62oydrsyn" path="res://Fonts/veteran typewriter.ttf" id="1_6jfs1"]
+[ext_resource type="FontFile" uid="uid://bojnafppfst52" path="res://Fonts/Fifties Movies.ttf" id="2_mkjq7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bk2rd"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="EnemyUi" type="PanelContainer"]
+offset_right = 130.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bk2rd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_6jfs1")
+theme_override_font_sizes/font_size = 25
+text = "Enemy"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_mkjq7")

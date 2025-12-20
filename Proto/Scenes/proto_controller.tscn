@@ -44,6 +44,7 @@ shape = SubResource("CapsuleShape3D_iof21")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.568143, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1.0943458, 0.1435616)
 environment = ExtResource("2_l2b5l")
 

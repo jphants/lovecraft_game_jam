@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dieafpfn3s2jv"]
+
+[ext_resource type="Script" uid="uid://cqni3r6smg0i7" path="res://Combat/player.gd" id="1_48ok2"]
+[ext_resource type="PackedScene" uid="uid://cgknfp16nc5w1" path="res://art/models/Flashlight.glb" id="2_1w7xh"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_48ok2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+
+[node name="Flashlight" parent="Camera3D" instance=ExtResource("2_1w7xh")]
+transform = Transform3D(1.655, 0, 0, 0, -7.2342345e-08, 1.655, 0, -1.655, -7.2342345e-08, 0.255, -0.214, -0.25)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/Flashlight"]
+transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0, 0.14734915, 0)
+light_color = Color(1, 1, 0, 1)
+spot_range = 55.0
+spot_angle = 28.811256
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D/Flashlight"]
+transform = Transform3D(0.6042296, 0, 0, 0, -2.6411715e-08, -0.6042296, 0, 0.6042296, -2.6411715e-08, 0.0019771457, 0.10928576, 0.14311671)
+visible = false
+light_energy = 0.1
+omni_range = 0.62857103
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D/Flashlight"]
+transform = Transform3D(1, 0, 0, 0, -0.99999994, -8.742277e-08, 0, 8.742277e-08, -0.99999994, 0, 0, 0)
+collision_mask = 3
+collide_with_areas = true
+debug_shape_custom_color = Color(0, 0.92941177, 0, 1)

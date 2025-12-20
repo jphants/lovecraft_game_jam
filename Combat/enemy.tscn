@@ -1,0 +1,35 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt8s3f16nmjdx"]
+
+[ext_resource type="Script" uid="uid://dgtmshwgxv3lp" path="res://Combat/enemy.gd" id="1_7k104"]
+[ext_resource type="Script" uid="uid://b2ltfk8mf82h4" path="res://Combat/attack.gd" id="2_d8opp"]
+[ext_resource type="Script" uid="uid://dtq6tqnh02bog" path="res://Combat/simple_attack.gd" id="3_iu004"]
+[ext_resource type="Texture2D" uid="uid://c5rwrkkhy1t32" path="res://art/Eyes/eye2.png" id="4_cjvjl"]
+
+[sub_resource type="Resource" id="Resource_cjvjl"]
+script = ExtResource("3_iu004")
+base_damage = 12
+metadata/_custom_type_script = "uid://dtq6tqnh02bog"
+
+[sub_resource type="Resource" id="Resource_iu004"]
+script = ExtResource("3_iu004")
+base_damage = 5
+metadata/_custom_type_script = "uid://dtq6tqnh02bog"
+
+[sub_resource type="PrismMesh" id="PrismMesh_iu004"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qi2p4"]
+albedo_color = Color(1, 0.0627451, 0.22352941, 1)
+albedo_texture = ExtResource("4_cjvjl")
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_7k104")
+frequency = Array[int]([1, 2])
+health = 50
+attacks = Array[ExtResource("2_d8opp")]([SubResource("Resource_cjvjl"), SubResource("Resource_iu004")])
+
+[node name="model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model"]
+mesh = SubResource("PrismMesh_iu004")
+surface_material_override/0 = SubResource("StandardMaterial3D_qi2p4")

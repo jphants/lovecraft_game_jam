@@ -1,0 +1,8 @@
+A battle has started!
+~ turn
+- Attack
+	You attacked.
+- Defend
+	You defended.
+- End battle => END
+=> turn
