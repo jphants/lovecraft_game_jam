@@ -42,7 +42,6 @@ environment = SubResource("Environment_lyht4")
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 7, 10)
 
 [node name="Player" parent="." instance=ExtResource("5_x0xbq")]
-health = 100
 attacks = Array[ExtResource("4_x0xbq")]([SubResource("Resource_1lt5g")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -68,3 +67,5 @@ layout_mode = 2
 [node name="EnemyUi4" parent="CanvasLayer/GridContainer" instance=ExtResource("6_cebw4")]
 layout_mode = 2
 size_flags_horizontal = 4
+
+[connection signal="target_changed" from="Player" to="." method="update_ui"]

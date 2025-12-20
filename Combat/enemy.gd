@@ -24,3 +24,5 @@ func _ready() -> void:
 		prob[i] = frequency[i] / tot
 	for i in range(1, frequency.size()):
 		prob[i] += prob[i-1]
+		
+	print(health, " ", max_health)

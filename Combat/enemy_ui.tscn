@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7dbh48q2prb8"]
+[gd_scene load_steps=5 format=3 uid="uid://c7dbh48q2prb8"]
 
 [ext_resource type="FontFile" uid="uid://brtp62oydrsyn" path="res://Fonts/veteran typewriter.ttf" id="1_6jfs1"]
+[ext_resource type="Script" uid="uid://bl50jjswksfew" path="res://Combat/enemy_ui.gd" id="1_mkjq7"]
 [ext_resource type="FontFile" uid="uid://bojnafppfst52" path="res://Fonts/Fifties Movies.ttf" id="2_mkjq7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bk2rd"]
@@ -22,6 +23,7 @@ corner_radius_bottom_left = 5
 offset_right = 130.0
 offset_bottom = 104.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bk2rd")
+script = ExtResource("1_mkjq7")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
