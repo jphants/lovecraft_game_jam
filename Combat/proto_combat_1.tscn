@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://rdbjqhj6cg33" path="res://Combat/combat.gd" id="1_c462a"]
 [ext_resource type="PackedScene" uid="uid://b8iwkppayu436" path="res://Combat/myenemy1.tscn" id="2_1lt5g"]
 [ext_resource type="PackedScene" uid="uid://dt8s3f16nmjdx" path="res://Combat/enemy.tscn" id="2_x0xbq"]
-[ext_resource type="PackedScene" uid="uid://pol4li2kk8f3" path="res://Combat/Enemy3.tscn" id="3_liowj"]
+[ext_resource type="PackedScene" uid="uid://lotb6x7n203v" path="res://Combat/Enemy3.tscn" id="3_liowj"]
 [ext_resource type="Script" uid="uid://b2ltfk8mf82h4" path="res://Combat/attack.gd" id="4_x0xbq"]
 [ext_resource type="Script" uid="uid://dtq6tqnh02bog" path="res://Combat/simple_attack.gd" id="5_cebw4"]
 [ext_resource type="PackedScene" uid="uid://dieafpfn3s2jv" path="res://Combat/player.tscn" id="5_x0xbq"]
@@ -18,6 +18,7 @@ sky_material = SubResource("ProceduralSkyMaterial_jkf7x")
 
 [sub_resource type="Environment" id="Environment_lyht4"]
 background_mode = 1
+background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_jjgbg")
 ambient_light_source = 2
 tonemap_mode = 2

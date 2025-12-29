@@ -83,7 +83,7 @@ var shake_time := 0.0
 @export var shake_speed := 4.0
 
 # Sanity tick
-var sanity_delay := 1.0
+var sanity_delay := 2.0
 var sanity_timer := 0.0
 
 # =====================================================

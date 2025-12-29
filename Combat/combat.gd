@@ -112,4 +112,4 @@ func battle_loop():
 			break
 	
 	# use won variable (bool) plz
-	get_tree().change_scene_to_file('res://Proto/Scenes/main.tscn')
+	get_tree().change_scene_to_file("res://art/ExampleScenes/ModelScene.tscn")

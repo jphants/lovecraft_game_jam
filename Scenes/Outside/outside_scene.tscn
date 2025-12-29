@@ -41,6 +41,9 @@ has_gravity = false
 [node name="Teleporter" parent="." instance=ExtResource("3_2jp4h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9513826, 1.2093908, -19.199196)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Teleporter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.632864)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ganml")
 
@@ -316,3 +319,11 @@ mesh = SubResource("BoxMesh_hgy54")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Env/Floor"]
 shape = SubResource("BoxShape3D_6set6")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(12.314187, 0, 0, 0, 3.1153846, 0, 0, 0, 1, 2.40526, 1.3671546, -18.294426)
+visible = false
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(12.314187, 0, 0, 0, 3.1153846, 0, 0, 0, 1, -12.5211315, 1.3671546, -18.294426)
+visible = false

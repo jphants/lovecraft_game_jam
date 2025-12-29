@@ -30,7 +30,7 @@ var floor := 0
 # ===============================
 @export var blink_min_time := 2.0
 @export var blink_max_time := 7.0
-@export var blink_chance := 0.6
+@export var blink_chance := 0.3
 
 var blink_enabled := true
 var blink_active := false

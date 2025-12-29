@@ -75,6 +75,5 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Seems to be a interactive object"
 
 [connection signal="pressed" from="Control/PauseMenu/QuitGame" to="." method="_on_quit_game_pressed"]

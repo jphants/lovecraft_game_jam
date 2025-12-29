@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cybbv32uvhj0i"]
 
-[ext_resource type="Script" uid="uid://byef1rqiw62jw" path="res://Prefabs/Traps/trapped_floor.gd" id="1_enqeh"]
+[ext_resource type="Script" path="res://Prefabs/Traps/trapped_floor.gd" id="1_enqeh"]
 [ext_resource type="PackedScene" uid="uid://luir7n4lc4mw" path="res://art/models/GroundTile/GroundTile.glb" id="1_mpcy8"]
 [ext_resource type="PackedScene" uid="uid://w5xufbidx8tk" path="res://art/models/CielingTile/CielingTile.glb" id="2_mstr8"]
 [ext_resource type="AudioStream" uid="uid://caju2iv28n4t3" path="res://Audio/eerie-scrape-220190.mp3" id="4_4w2lj"]
@@ -22,9 +22,6 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.45709848, 0)
 
 [node name="CielingTile" parent="StaticBody3D" instance=ExtResource("2_mstr8")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 2.5, 0)
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3761563, 0)
 
 [node name="Area3D" type="Area3D" parent="StaticBody3D"]
 

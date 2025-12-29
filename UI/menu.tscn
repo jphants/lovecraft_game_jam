@@ -76,7 +76,7 @@ text = "PLAY"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_4hkxj")
 theme_override_font_sizes/font_size = 71
-text = "SETTINGS"
+text = "CONTROLS"
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -125,10 +125,11 @@ offset_bottom = 586.25
 theme_override_fonts/font = ExtResource("3_4hkxj")
 theme_override_font_sizes/font_size = 46
 text = "Special thanks to:
-Someone 1
-Someone 1
-Someone 1
-Someone 1
+Jphants - Dev
+Runosake - Dev
+Midnight - 2D Art and Animations
+Ichitran - 3D Models and Scenarios
+
 
 Fonts:
 Fifties movies
